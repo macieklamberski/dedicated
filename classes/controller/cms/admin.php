@@ -25,14 +25,19 @@ class Controller_CMS_Admin extends Controller_Application {
 		}
 
 		parent::before();
+
+		$this->template
+			->set('affected_ids', Session::instance()->get('affected_ids'));
 	}
 
 	public function after()
 	{
-		parent::after();
+		Session::instance()->set('affected_ids', array());
 
 		$this->template
-			->set('flashes', Hint::get());
+			->set('flashes', Hint::render(NULL, TRUE, 'hint/admin'));
+
+		parent::after();
 	}
 
 }

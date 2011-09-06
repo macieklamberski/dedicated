@@ -16,9 +16,9 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 			'delete' => __(':model został pomyślnie usunięty.'),
 		);
 
-    // Trying to generate model name based on controller's name
-    self::$_model_class = Inflector::singular(str_replace('Controller_Admin_', '', get_class($this)));
-    self::$_model_name = ucfirst(self::$_model_name);
+		// Trying to generate model name based on controller's name
+		self::$_model_class = Inflector::singular(str_replace('Controller_Admin_', '', get_class($this)));
+		self::$_model_name = ucfirst(self::$_model_class);
 	}
 
 	public function action_index()
@@ -73,6 +73,8 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 					->set($_FILES)
 					->save();
 
+				Session::instance()->set('affected_ids', array($record->id()));
+
 				Hint::set(Hint::SUCCESS, self::$_messages['add'], array(':model' => self::$_model_name));
 
 				$this->request->redirect(Session::instance()->get('back'));
@@ -100,6 +102,8 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 					->set($_POST)
 					->set($_FILES)
 					->save();
+
+				Session::instance()->set('affected_ids', array($record->id()));
 
 				Hint::set(Hint::SUCCESS, self::$_messages['edit'], array(':model' => self::$_model_name));
 

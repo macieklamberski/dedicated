@@ -17,7 +17,7 @@ class Controller_CMS_Application extends Controller_Template_Twig {
 			->bind('lang',        $lang)
 			->bind('langs',       $langs);
 
-    // Getting current environment's name
+		// Getting current environment's name
 		switch (Kohana::$environment)
 		{
 			case Kohana::PRODUCTION:
@@ -45,11 +45,11 @@ class Controller_CMS_Application extends Controller_Template_Twig {
 				$this->lang = $lang;
 				I18n::lang($lang->code);
 
-        break;
+				break;
 			}
 		}
 
-    // If current language is not found in database, show 404 page
+		// If current language is not found in database, show 404 page
 		if (empty($this->lang))
 		{
 			throw new HTTP_Exception_404;
