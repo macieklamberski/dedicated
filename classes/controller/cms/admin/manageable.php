@@ -88,9 +88,9 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 	{
 		$this->template
 			->bind('errors', $errors)
-			->bind(self::$_model, $record);
+			->bind(self::$_model_class, $record);
 
-		$record = Jelly::query(self::$_model, $this->request->param('id'))->find();
+		$record = Jelly::query(self::$_model_class, $this->request->param('id'))->find();
 
 		if ($this->request->method() == Request::POST)
 		{
@@ -114,7 +114,7 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 
 	public function action_delete()
 	{
-		Jelly::query(self::$_model, $this->request->param('id'))
+		Jelly::query(self::$_model_class, $this->request->param('id'))
 			->find()
 			->delete();
 
