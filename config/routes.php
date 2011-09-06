@@ -3,7 +3,7 @@
 //-- Admin ---------------------------------------------------------------------
 
 // Padamini's assets (CSS, JS, images)
-Route::set('admin-media-show', 'admin(/<file>)', array('file' => '.+'))
+Route::set('admin-media-show', 'padamini(/<file>)', array('file' => '.+'))
 	->defaults(array(
 		'directory'  => 'admin',
 		'controller' => 'media',
