@@ -1,0 +1,23 @@
+{% macro selected_if(request, controllers, actions) %}
+
+  {% if controllers|length == 0 or request.controller in controllers %}
+    {% if actions|length == 0 or request.action in actions %}
+      class="selected"
+    {% endif %}
+  {% endif %}
+
+{% endmacro %}
+
+{% macro lang_tabs(langs) %}
+  <div class="field field-tabs">
+    {% for lang in langs %}
+      <label for="{{ "tab-lang-"~lang.code }}">
+        {% form.radio "lang", lang.code, false, {"id":"tab-lang-"~lang.code} %}
+        {{ lang.name }}
+      </label>
+    {% endfor %}
+    <p class="hint block">
+      {{ "Pola poniżej odpowiadają zaznaczonej wersji językowej. Należy uzupełnić wszystkie wymagane pola w każdym z dostępnych języków."|trans }}
+    </p>
+  </div>
+{% endmacro %}

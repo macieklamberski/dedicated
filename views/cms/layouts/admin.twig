@@ -1,5 +1,7 @@
 {% extends "layouts/application.twig" %}
 
+{% import "helpers/admin.twig" as h %}
+
 {% block title %}{% block subtitle %}{% endblock %} | {{ settings.project_name }} Admin{% endblock %}
 
 {% block head %}
@@ -40,13 +42,12 @@
           <h4 class="outline">{{ "Główna nawigacja"|trans }}</h4>
           <ul class="wrapper tabs clearfix">
             {% block navigation %}
-              <li><a href="#">Dashboard</a></li>
-              <li class="selected"><a href="#">Comments <small>12</small></a></li>
-              <li><a href="#">Products</a></li>
-              <li><a href="#">Orders <small>5</small></a></li>
-              <li><a href="#">Users</a></li>
-              <li><a href="#">Static pages</a></li>
-              <li><a href="#">Parameters</a></li>
+              <li {{ h.selected_if(request, ["settings"]) }}>
+                <a href="{% url "admin-settings-index", {} %}">{{ "Ustawienia"|trans }}</a>
+              </li>
+              <li {{ h.selected_if(request, ["translations"]) }}>
+                <a href="{% url "admin-translations-index", {} %}">{{ "Tłumaczenia"|trans }}</a>
+              </li>
             {% endblock %}
           </ul>
         </nav>
