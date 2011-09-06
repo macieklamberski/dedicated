@@ -14,13 +14,9 @@ class I18n extends Kohana_I18n {
 		// Caching loaded translations
 		if (empty(self::$_translations[$lang]))
 		{
-			$translations = DB::select()
-				->from('translations')
-				->join('langs', 'LEFT')
-				->on('langs.code', '=', 'translations.lang_id')
-				->where('langs.code', '=', $lang)
-				->as_object()
-				->execute();
+			$translations = Jelly::query('translation')
+				->where('code', '=', $lang)
+				->select();
 
 			foreach ($translations as $translation)
 			{

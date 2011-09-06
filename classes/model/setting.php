@@ -9,6 +9,9 @@ class Model_Setting extends Jelly_Model {
 			'key' => Jelly::field('string'),
 			'value' => Jelly::field('text'),
 			'default' => Jelly::field('text'),
+			'editable' => Jelly::field('boolean', array(
+				'default' => TRUE,
+			)),
 		));
 	}
 

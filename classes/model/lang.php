@@ -15,6 +15,8 @@ class Model_Lang extends Jelly_Model {
 			'position' => Jelly::field('integer'),
 		));
 
+		$meta->primary_key('code');
+
 		$meta->sorting(array('position' => 'DESC', 'id' => 'DESC'));
 	}
 

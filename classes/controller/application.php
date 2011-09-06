@@ -35,4 +35,14 @@ class Controller_Application extends Controller_Template_Twig {
 		$langs = Jelly::query('lang')->select();
 	}
 
+	public function after()
+	{
+		parent::after();
+
+		if (isset($_GET['profile']) && Kohana::$environment != Kohana::PRODUCTION)
+		{
+			$this->response->body(View::factory('profiler/stats'));
+		}
+	}
+
 }
