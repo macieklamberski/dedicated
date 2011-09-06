@@ -2,7 +2,7 @@
 
 {% block language %}pl{% endblock %}
 
-{% block title %}| {{ project_name|length ? project_name : "Project's name" }} Admin{% endblock %}
+{% block title %}| {{ settings.project_name }} Admin{% endblock %}
 
 {% block head %}
   <link href="{{ base_uri~"padamini/styles/boxy.css"|fversion }}" rel="stylesheet">
@@ -26,7 +26,7 @@
       <header role="banner">
         <div class="wrapper top clearfix">
           <div class="title">
-            <h3><a href="{% url "admin-index", {} %}" class="to-index left"><em>{{ project_name|length ? project_name : "Project's name" }}</em> Admin</a></h3>
+            <h3><a href="{% url "admin-index", {} %}" class="to-index left"><em>{{ settings.project_name }}</em> Admin</a></h3>
             <a href="{% url "site-index", {} %}" class="title-action left external">{{ "Odwiedź stronę"|trans }}</a>
           </div>
 
