@@ -1,0 +1,3 @@
+[submodule "vendor/padamini"]
+	path = vendor/padamini
+	url = git://github.com/lamberski/padamini.git
