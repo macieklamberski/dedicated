@@ -1,0 +1,12 @@
+{% extends "layouts/application.twig" %}
+
+{% block title %}{% block subtitle %}{% endblock %} | {{ settings.site_title }}{% endblock %}
+
+{% block head %}
+  {% if settings.site_keywords|length %}
+    <meta name="keywords" content="{{ settings.site_keywords }}">
+  {% endif %}
+  {% if settings.site_description|length %}
+    <meta name="description" content="{{ settings.site_description }}">
+  {% endif %}
+{% endblock %}
