@@ -14,8 +14,10 @@ class Controller_CMS_Application extends Controller_Template_Twig {
 			->set('settings',     Settings::get())
 			->bind('request',     $this->request)
 			->bind('environment', $environment)
+			->bind('lang',        $lang)
 			->bind('langs',       $langs);
 
+    // Getting current environment's name
 		switch (Kohana::$environment)
 		{
 			case Kohana::PRODUCTION:
@@ -33,6 +35,25 @@ class Controller_CMS_Application extends Controller_Template_Twig {
 		}
 
 		$langs = Jelly::query('lang')->select();
+
+		$current_lang = $this->request->param('lang', Settings::get($this->request->directory().'_default_lang'));
+
+		foreach ($langs as $lang)
+		{
+			if ($current_lang == $lang->code)
+			{
+				$this->lang = $lang;
+				I18n::lang($lang->code);
+
+        break;
+			}
+		}
+
+    // If current language is not found in database, show 404 page
+		if (empty($this->lang))
+		{
+			throw new HTTP_Exception_404;
+		}
 	}
 
 	public function after()

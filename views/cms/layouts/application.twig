@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{% block language %}en{% endblock %}">
+<html lang="{% block language %}{{ lang.code|default("en") }}{% endblock %}">
   <head>
     <meta charset="utf-8">
     <title>{% block title %}{% endblock %}</title>
