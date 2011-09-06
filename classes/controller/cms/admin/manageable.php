@@ -41,7 +41,7 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 		$records_count = Jelly::query(self::$_model_class)->count();
 	}
 
-	public function action_position()
+	public function action_sort()
 	{
 		$positions = Arr::get($_GET, 'positions', array());
 
