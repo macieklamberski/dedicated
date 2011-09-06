@@ -2,7 +2,7 @@
 
 {% block language %}pl{% endblock %}
 
-{% block title %}| {{ settings.project_name }} Admin{% endblock %}
+{% block title %}{% block subtitle %}{% endblock %} | {{ settings.project_name }} Admin{% endblock %}
 
 {% block head %}
   <link href="{{ base_uri~"padamini/styles/boxy.css"|fversion }}" rel="stylesheet">
