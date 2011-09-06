@@ -17,18 +17,18 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 		);
 
     // Trying to generate model name based on controller's name
-    self::$_model_class = Inflector::singular(str_replace('Controller_Admin_', get_class($this)));
-    self::$_model_class = ucfirst(self::$_model_name);
+    self::$_model_class = Inflector::singular(str_replace('Controller_Admin_', '', get_class($this)));
+    self::$_model_name = ucfirst(self::$_model_name);
 	}
 
 	public function action_index()
 	{
-		$plural_model_name = Inflector::plural(self::$_model);
+		$plural_model_class = Inflector::plural(self::$_model_class);
 
 		$this->template
 			->bind('pagination', $pagination)
-			->bind($plural_model_name, $infos)
-			->bind($plural_model_name.'_count', $records_count);
+			->bind($plural_model_class, $records)
+			->bind($plural_model_class.'_count', $records_count);
 
 		$query = Jelly::query(self::$_model_class)->by_lang($this->request->param('lang'));
 
