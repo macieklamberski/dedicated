@@ -81,7 +81,7 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 			}
 			catch (Jelly_Validation_Exception $e)
 			{
-				$errors = $e->errors();
+				$errors = $e->errors('model');
 			}
 		}
 	}
@@ -111,7 +111,7 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 			}
 			catch (Jelly_Validation_Exception $e)
 			{
-				$errors = $e->errors();
+				$errors = $e->errors('model');
 			}
 		}
 	}
