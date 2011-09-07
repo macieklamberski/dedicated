@@ -9,13 +9,13 @@
 
   {% form.open current_uri, {"class":"form"} %}
     <fieldset class="fields fields-plain">
-      {% block lang_tabs %}{% endblock %}
+      {{ h.lang_tabs(langs) }}
 
       {% for key, langs in translations %}
         <div class="field">
           {% form.label "form-"~key|urltitle, key|replace(" ", "&nbsp;"), {"class":"label", "title":key} %}
           {% for translation in langs %}
-            {% form.input key~"["~translation.lang.code~"]", translation.value, {"class":"medium", "id":"form-"~key|urltitle} %}
+            {% form.input key~"["~translation.lang.code~"]", translation.value, {"class":"big", "id":"form-"~key|urltitle} %}
           {% endfor %}
         </div>
       {% endfor %}
