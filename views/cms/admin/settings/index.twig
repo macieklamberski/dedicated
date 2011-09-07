@@ -14,7 +14,7 @@
       <div class="field">
         {% form.label "form-site-title", "Tytuł"|trans, {"class":"label"} %}
         {% form.input "site_title", settings.site_title, {"class":"medium", "id":"form-site-title"} %}
-        <p class="hint block">Tytuł strony wyświetlany na pasku i/lub karcie przeglądarki. Na stronie głównej witryny wyświetlany będzie tylko tytuł. Na pozostałych podstronach tekst w formacie <code>{{ "<nazwa podstrony> | <tytuł witryny>"|e }}</code>.</p>
+        <p class="hint block">Tytuł witryny wyświetlany na pasku i/lub karcie przeglądarki. Na stronie głównej wyświetlany będzie tylko on. Na pozostałych podstronach tekst w formacie <code>{{ "<nazwa podstrony> | <tytuł witryny>"|e }}</code>.</p>
       </div>
 
       <div class="field">
@@ -26,7 +26,7 @@
       <div class="field">
         {% form.label "form-site-keywords", "Słowa kluczowe"|trans, {"class":"label"} %}
         {% form.textarea "site_keywords", settings.site_keywords, {"class":"big", "rows": 3, "id":"form-site-keywords"} %}
-        <p class="hint block">Zawartość tagu <code>{{ '<meta name="keywords">'|e }}</code> używanego do określenia zawartości strony poprzez dobór odpowiednich słów kluczowych.</p>
+        <p class="hint block">Zawartość tagu <code>{{ '<meta name="keywords">'|e }}</code> używanego do określenia zawartości witryny poprzez dobór odpowiednich słów kluczowych.</p>
       </div>
 
       <div class="field">
@@ -36,7 +36,7 @@
             <option value="{{ lang.code }}"{{ lang.code == settings.site_default_lang ? " selected" : "" }}>{{ lang.name }}</option>
           {% endfor %}
         </select>
-        <p class="hint block">Wersja językowa strony, która będzie wyświetlana domyślnie po wejściu na <a href="{% url "site-index", {"lang":lang} %}" class="external">{{ base_url }}{% url "site-index", {"lang":lang} %}</a>.</p>
+        <p class="hint block">Wersja językowa, która będzie wyświetlana domyślnie po wejściu na <a href="{% url "site-index", {} %}" class="external">{{ base_url }}{% url "site-index", {} %}</a>.</p>
       </div>
     </fieldset>
 
