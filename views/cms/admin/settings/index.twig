@@ -1,0 +1,58 @@
+{% extends "layouts/admin.twig" %}
+
+{% block subtitle "Ustawienia"|trans %}
+
+{% block main %}
+  <header class="header header-page clearfix">
+    <h1 class="heading heading-page">{{ block("subtitle") }}</h1>
+  </header>
+
+  {% form.open current_uri, {"class":"form"} %}
+    <fieldset class="fields">
+      <legend><span>{{ "Witryna"|trans }}</span></legend>
+
+      <div class="field">
+        {% form.label "form-site-title", "Tytuł"|trans, {"class":"label"} %}
+        {% form.input "site_title", settings.site_title, {"class":"medium", "id":"form-site-title"} %}
+        <p class="hint block">Tytuł strony wyświetlany na pasku i/lub karcie przeglądarki. Na stronie głównej witryny wyświetlany będzie tylko tytuł. Na pozostałych podstronach tekst w formacie <code>{{ "<nazwa podstrony> | <tytuł witryny>"|e }}</code>.</p>
+      </div>
+
+      <div class="field">
+        {% form.label "form-site-description", "Opis"|trans, {"class":"label"} %}
+        {% form.textarea "site_description", settings.site_description, {"class":"big", "rows": 3, "id":"form-site-description"} %}
+        <p class="hint block">Zawartość tagu <code>{{ '<meta name="description">'|e }}</code> odpowiadającego za opis witryny w wynikach wyszukiwarek.</p>
+      </div>
+
+      <div class="field">
+        {% form.label "form-site-keywords", "Słowa kluczowe"|trans, {"class":"label"} %}
+        {% form.textarea "site_keywords", settings.site_keywords, {"class":"big", "rows": 3, "id":"form-site-keywords"} %}
+        <p class="hint block">Zawartość tagu <code>{{ '<meta name="keywords">'|e }}</code> używanego do określenia zawartości strony poprzez dobór odpowiednich słów kluczowych.</p>
+      </div>
+
+      <div class="field">
+        {% form.label "form-site-default-lang", "Domyślny język"|trans, {"class":"label"} %}
+        <select name="site_default_lang" id="form-site-default-lang">
+          {% for lang in langs %}
+            <option value="{{ lang.code }}"{{ lang.code == settings.site_default_lang ? " selected" : "" }}>{{ lang.name }}</option>
+          {% endfor %}
+        </select>
+        <p class="hint block">Wersja językowa strony, która będzie wyświetlana domyślnie po wejściu na <a href="{% url "site-index", {"lang":lang} %}" class="external">{{ base_url }}{% url "site-index", {"lang":lang} %}</a>.</p>
+      </div>
+    </fieldset>
+
+    {% block custom %}{% endblock %}
+
+    <fieldset class="fields">
+      <legend><span>{{ "Panel administracyjny"|trans }}</span></legend>
+      <div class="field">
+        {% form.label "form-admin-password", "Hasło"|trans, {"class":"label"} %}
+        {% form.input "admin_password", null, {"class":"medium", "id":"form-admin-password"} %}
+        <p class="hint block">Jeśli chcesz zmienić hasło do panelu administracyjnego, wprowadź je do pola powyżej. W innym wypadku pozostaw je puste. <strong>Uwaga! Tekst wprowadzany do tego pola nie jest maskowany!</strong></p>
+      </div>
+    </fieldset>
+
+    <fieldset class="buttons">
+      <button class="button button-create button-main right">{{ "Zapisz zmiany"|trans }}</button>
+    </fieldset>
+  {% form.close 0 %}
+{% endblock %}

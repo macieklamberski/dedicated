@@ -1,0 +1,28 @@
+{% extends "layouts/admin.twig" %}
+
+{% block subtitle "Tłumaczenia"|trans %}
+
+{% block main %}
+  <header class="header header-page clearfix">
+    <h1 class="heading heading-page">{{ block("subtitle") }}</h1>
+  </header>
+
+  {% form.open current_uri, {"class":"form"} %}
+    <fieldset class="fields fields-plain">
+      {% block lang_tabs %}{% endblock %}
+
+      {% for key, langs in translations %}
+        <div class="field">
+          {% form.label "form-"~key|urltitle, key|replace(" ", "&nbsp;"), {"class":"label", "title":key} %}
+          {% for translation in langs %}
+            {% form.input key~"["~translation.lang.code~"]", translation.value, {"class":"medium", "id":"form-"~key|urltitle} %}
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </fieldset>
+
+    <fieldset class="buttons">
+      <button class="button button-create button-main right">{{ "Zapisz zmiany"|trans }}</button>
+    </fieldset>
+  {% form.close 0 %}
+{% endblock %}
