@@ -13,8 +13,10 @@
 
       {% for key, langs in translations %}
         <div class="field">
-          {% form.label "form-"~key|urltitle, key|replace(" ", "&nbsp;"), {"class":"label", "title":key} %}
           {% for translation in langs %}
+            {% if loop.first %}
+              {% form.label "form-"~key|urltitle, translation.key|replace(" ", "&nbsp;"), {"class":"label", "title":translation.key} %}
+            {% endif %}
             {% form.input key~"["~translation.lang.code~"]", translation.value, {"class":"big", "id":"form-"~key|urltitle} %}
           {% endfor %}
         </div>

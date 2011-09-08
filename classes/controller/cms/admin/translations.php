@@ -13,7 +13,7 @@ class Controller_CMS_Admin_Translations extends Controller_Admin {
 
 		foreach ($records as $record)
 		{
-			$translations[$record->key][$record->lang->code] = $record;
+			$translations[base64_encode($record->key)][$record->lang->code] = $record;
 		}
 
 		if ($this->request->method() == Request::POST)
@@ -22,10 +22,12 @@ class Controller_CMS_Admin_Translations extends Controller_Admin {
 
 			foreach ($_POST as $key => $translations)
 			{
+        $key = base64_decode($key);
+
 				foreach ($translations as $lang => $translation)
 				{
 					Jelly::query('translation')
-						->by_key(str_replace('_', ' ', $key))
+						->by_key($key)
 						->by_lang($lang)
 						->set(array('value' => $translation))
 						->update();
