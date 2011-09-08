@@ -2,43 +2,62 @@
 
 abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 
-	protected static $_model_name;
-	protected static $_model_class;
-	protected static $_messages;
+	protected static $_options;
 
-	public function before()
+	public function before(array $options = NULL)
 	{
 		parent::before();
 
-		self::$_messages = array(
-			'add'    => __(':model został pomyślnie dodany.'),
-			'edit'   => __(':model został pomyślnie zaktualizowany.'),
-			'delete' => __(':model został pomyślnie usunięty.'),
+		$controller_name = strtolower(str_replace('Controller_Admin_', '', get_class($this)));
+
+		$default_options = array(
+			'model_class' => Inflector::singular($controller_name),
+			'model_table' => $controller_name,
+			'model_name'  => ucfirst(Inflector::singular($controller_name)),
+			'messages'    => array(
+				'add'    => __(':model został pomyślnie dodany.'),
+				'edit'   => __(':model został pomyślnie zaktualizowany.'),
+				'delete' => __(':model został pomyślnie usunięty.'),
+			),
 		);
 
-		// Trying to generate model name based on controller's name
-		self::$_model_class = Inflector::singular(str_replace('Controller_Admin_', '', get_class($this)));
-		self::$_model_name = ucfirst(self::$_model_class);
+		self::$_options = array_merge($default_options, $options);
+
+		$this->template
+			->bind('errors',                                $this->errors)
+			->bind('pagination',                            $this->pagination)
+			->bind(self::$_options['model_class'],          $this->record)
+			->bind(self::$_options['model_table'],          $this->records)
+			->bind(self::$_options['model_table'].'_count', $this->records_count);
+	}
+
+	protected $record;
+	protected $records;
+	protected $records_count;
+	protected $errors;
+	protected $pagination;
+
+	protected function perform_record_actions()
+	{
+		if ( ! $this->record)
+		{
+			$this->record = Jelly::query(self::$_options['model_class'], $this->request->param('id'))->find();
+		}
+
+		Session::instance()->set('affected_ids', array($this->record->id()));
 	}
 
 	public function action_index()
 	{
-		$plural_model_class = Inflector::plural(self::$_model_class);
+		$query = Jelly::query(self::$_options['model_class'])->by_lang($this->request->param('lang'));
 
-		$this->template
-			->bind('pagination', $pagination)
-			->bind($plural_model_class, $records)
-			->bind($plural_model_class.'_count', $records_count);
-
-		$query = Jelly::query(self::$_model_class)->by_lang($this->request->param('lang'));
-
-		$pagination = Pagination::factory(array(
+		$this->pagination = Pagination::factory(array(
 			'group' => 'admin',
 			'total_items' => $query->count(),
 		));
 
-		$records = $query->paginate($pagination)->select();
-		$records_count = Jelly::query(self::$_model_class)->count();
+		$this->records = $query->paginate($this->pagination)->select();
+		$this->records_count = Jelly::query(self::$_options['model_class'])->count();
 	}
 
 	public function action_sort()
@@ -47,7 +66,7 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 
 		foreach ($positions as $id => $position)
 		{
-			Jelly::query(self::$_model_class)
+			Jelly::query(self::$_options['model_class'])
 				->set(array('position' => $position))
 				->where(':primary_key', '=', $id)
 				->update();
@@ -58,71 +77,68 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 
 	public function action_add()
 	{
-		$this->template
-			->bind('errors', $errors)
-			->bind(self::$_model_class, $record);
-
-		$record = Jelly::factory(self::$_model_class);
+		$this->record = Jelly::factory(self::$_options['model_class']);
 
 		if ($this->request->method() == Request::POST)
 		{
 			try
 			{
-				$record
+				$this->record
 					->set($_POST)
 					->set($_FILES)
 					->save();
 
-				Session::instance()->set('affected_ids', array($record->id()));
+				$this->perform_record_actions();
 
-				Hint::set(Hint::SUCCESS, self::$_messages['add'], array(':model' => self::$_model_name));
+				Hint::set(Hint::SUCCESS, self::$_options['messages']['add'], array(':model' => self::$_options['model_name']));
 
 				$this->request->redirect(Session::instance()->get('back'));
 			}
 			catch (Jelly_Validation_Exception $e)
 			{
-				$errors = $e->errors('model');
+				$this->errors = $e->errors('model');
 			}
 		}
 	}
 
 	public function action_edit()
 	{
-		$this->template
-			->bind('errors', $errors)
-			->bind(self::$_model_class, $record);
-
-		$record = Jelly::query(self::$_model_class, $this->request->param('id'))->find();
+    $this->perform_record_actions();
 
 		if ($this->request->method() == Request::POST)
 		{
 			try
 			{
-				$record
+        foreach ($_FILES as $name => $file)
+        {
+          if (Upload::not_empty($file))
+          {
+            $this->record->set($name, $file);
+          }
+        }
+
+				$this->record
 					->set($_POST)
-					->set($_FILES)
 					->save();
 
-				Session::instance()->set('affected_ids', array($record->id()));
-
-				Hint::set(Hint::SUCCESS, self::$_messages['edit'], array(':model' => self::$_model_name));
+				Hint::set(Hint::SUCCESS, self::$_options['messages']['edit'], array(':model' => self::$_options['model_name']));
 
 				$this->request->redirect(Session::instance()->get('back'));
 			}
 			catch (Jelly_Validation_Exception $e)
 			{
-				$errors = $e->errors('model');
+				$this->errors = $e->errors('model');
 			}
 		}
 	}
 
 	public function action_delete()
 	{
-		Jelly::query(self::$_model_class, $this->request->param('id'))
-			->find()
-			->delete();
+	$this->perform_record_actions();
 
-		Hint::set(Hint::SUCCESS, self::$_messages['delete'], array(':model' => self::$_model_name));
+		$this->record->delete();
+
+		Hint::set(Hint::SUCCESS, self::$_options['messages']['delete'], array(':model' => self::$_options['model_name']));
 
 		$this->request->redirect(Session::instance()->get('back'));
 	}
