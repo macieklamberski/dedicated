@@ -13,7 +13,7 @@ class Controller_CMS_Admin_Media extends Controller {
 		// Remove the extension from the filename
 		$file = substr($file, 0, -(strlen($ext) + 1));
 
-		if ($file = Kohana::find_file('vendor/padamini/www', $file, $ext))
+		if ($file = Kohana::find_file($this->request->param('path'), $file, $ext))
 		{
 			// Check if the browser sent an "if-none-match: <etag>" header, and tell if the file hasn't changed
 			$this->response->check_cache(sha1($this->request->uri()).filemtime($file), $this->request);

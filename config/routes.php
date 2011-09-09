@@ -2,13 +2,24 @@
 
 //-- Admin ---------------------------------------------------------------------
 
-// Padamini's assets (CSS, JS, images)
-Route::set('admin-media-show', 'padamini(/<file>)', array('file' => '.+'))
+/* Assets */
+
+Route::set('admin-media-padamni', 'padamini(/<file>)', array('file' => '.+'))
 	->defaults(array(
 		'directory'  => 'admin',
 		'controller' => 'media',
 		'action'     => 'show',
+		'path'       => 'vendor/padamini/www',
 		'file'       => NULL,
+	));
+
+Route::set('admin-media-cms', 'cms/scripts/cms.js', array('file' => '.+'))
+	->defaults(array(
+		'directory'  => 'admin',
+		'controller' => 'media',
+		'action'     => 'show',
+		'path'       => NULL,
+		'file'       => '/scripts/cms.js',
 	));
 
 /* Index */
