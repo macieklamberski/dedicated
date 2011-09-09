@@ -36,7 +36,7 @@
             <option value="{{ lang.code }}"{{ lang.code == settings.site_default_lang ? " selected" : "" }}>{{ lang.name }}</option>
           {% endfor %}
         </select>
-        <p class="hint block">Wersja językowa, która będzie wyświetlana domyślnie po wejściu na <a href="{% url "site-index", {} %}" class="external">{{ base_url }}{% url "site-index", {} %}</a>.</p>
+        <p class="hint block">Wersja językowa, która będzie wyświetlana domyślnie po wejściu na <a href="{% url "site-index", {} %}" rel="external">{{ base_url }}{% url "site-index", {} %}</a>.</p>
       </div>
     </fieldset>
 
