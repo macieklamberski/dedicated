@@ -16,6 +16,8 @@ class Controller_CMS_Admin_Session extends Controller_Admin {
 		{
 			if (Auth::instance()->login('admin', Arr::get($_POST, 'password')))
 			{
+				Hint::set('info', __('Witaj w panelu administracyjnym :project_name!'), array(':project_name' => Settings::get('project_name')));
+
 				$this->request->redirect(Route::get('admin-index')->uri());
 			}
 		}
