@@ -13,7 +13,7 @@ Route::set('admin-media-show', 'padamini(/<file>)', array('file' => '.+'))
 
 /* Index */
 
-Route::set('admin-index', 'administration')
+Route::set('admin-index', 'cms')
 	->defaults(array(
 		'directory'  => 'admin',
 		'controller' => 'index',
@@ -21,14 +21,14 @@ Route::set('admin-index', 'administration')
 
 /* Session */
 
-Route::set('admin-session-login', 'administration/login')
+Route::set('admin-session-login', 'cms/login')
 	->defaults(array(
 		'directory'  => 'admin',
 		'controller' => 'session',
 		'action'     => 'login',
 	));
 
-Route::set('admin-session-logout', 'administration/logout')
+Route::set('admin-session-logout', 'cms/logout')
 	->defaults(array(
 		'directory'  => 'admin',
 		'controller' => 'session',
@@ -39,7 +39,7 @@ Route::set('admin-session-logout', 'administration/logout')
 
 foreach (array('settings', 'translations') as $module)
 {
-	Route::set('admin-'.$module.'-index', 'administration/'.$module)
+	Route::set('admin-'.$module.'-index', 'cms/'.$module)
 		->defaults(array(
 			'directory'  => 'admin',
 			'controller' => $module,
