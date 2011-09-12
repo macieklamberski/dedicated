@@ -13,10 +13,10 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 		$default_options = array(
 			'model_class' => Inflector::singular($controller_name),
 			'model_table' => $controller_name,
-			'model_name'  => ucfirst(Inflector::singular($controller_name)),
-			'messages'    => array(
-				'add'    => __(':model został pomyślnie dodany.'),
-				'edit'   => __(':model został pomyślnie zaktualizowany.'),
+			'model_name'	 => ucfirst(Inflector::singular($controller_name)),
+			'messages'		 => array(
+				'add'		 => __(':model został pomyślnie dodany.'),
+				'edit'	 => __(':model został pomyślnie zaktualizowany.'),
 				'delete' => __(':model został pomyślnie usunięty.'),
 			),
 		);
@@ -24,10 +24,10 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 		self::$_options = array_merge($default_options, $options);
 
 		$this->template
-			->bind('errors',                                $this->errors)
-			->bind('pagination',                            $this->pagination)
-			->bind(self::$_options['model_class'],          $this->record)
-			->bind(self::$_options['model_table'],          $this->records)
+			->bind('errors',																 $this->errors)
+			->bind('pagination',														 $this->pagination)
+			->bind(self::$_options['model_class'],					 $this->record)
+			->bind(self::$_options['model_table'],					 $this->records)
 			->bind(self::$_options['model_table'].'_count', $this->records_count);
 	}
 
@@ -103,19 +103,19 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 
 	public function action_edit()
 	{
-    $this->perform_record_actions();
+		$this->perform_record_actions();
 
 		if ($this->request->method() == Request::POST)
 		{
 			try
 			{
-        foreach ($_FILES as $name => $file)
-        {
-          if (Upload::not_empty($file))
-          {
-            $this->record->set($name, $file);
-          }
-        }
+				foreach ($_FILES as $name => $file)
+				{
+					if (Upload::not_empty($file))
+					{
+						$this->record->set($name, $file);
+					}
+				}
 
 				$this->record
 					->set($_POST)
