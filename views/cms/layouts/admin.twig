@@ -28,10 +28,10 @@
         <div class="wrapper top clearfix">
           <div class="title">
             <h3><a href="{% url "admin-index", {} %}" class="to-index left"><em>{{ settings.project_name }}</em> CMS</a></h3>
-            <a href="{% url "site-index", {} %}" class="title-action left external">{{ "Odwiedź stronę"|trans }}</a>
+            <a href="{% url "site-index", {} %}" class="title-action left" rel="external">{{ "Odwiedź stronę"|trans }}</a>
           </div>
 
-          <div class="user-panel">            
+          <div class="user-panel">
             {% if current_user.loaded %}
               <p>{{ "Zalogowany jako"|trans }} <em>{{ current_user.name|default(current_user.username) }}</em></p>
             {% endif %}
