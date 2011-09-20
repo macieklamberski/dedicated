@@ -30,6 +30,16 @@ Route::set('admin-index', 'cms')
 		'controller' => 'index',
 	));
 
+/* Backups */
+
+Route::set('admin-backups', 'cms/backups(/<action>)', array(
+		'action' => 'database|files',
+	))
+	->defaults(array(
+		'directory'  => 'admin',
+		'controller' => 'backups',
+	));
+
 /* Session */
 
 Route::set('admin-session-login', 'cms/login')
