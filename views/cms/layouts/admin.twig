@@ -50,7 +50,7 @@
                 <a href="{% url "admin-translations-index", {} %}">{{ "Tłumaczenia"|trans }}</a>
               </li>
               <li {{ h.selected_if(request, ["backups"]) }}>
-                <a href="{% url "admin-backups", {} %}">{{ "Kopie zapasowe"|trans }}</a>
+                <a href="{% url "admin-backups", {} %}">{{ "Eksport danych"|trans }}</a>
               </li>
             {% endblock %}
           </ul>
