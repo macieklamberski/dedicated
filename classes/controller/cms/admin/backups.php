@@ -58,7 +58,7 @@ class Controller_CMS_Admin_Backups extends Controller_Admin {
 		}
 
 		// Create archive file from all CSV files
-		$archive_file = $this->prefix.'database-'.date('Y-m-d-H.i.s').'.tar.gz';
+		$archive_file = $this->prefix.'database-'.date('YmdHis').'.tar.gz';
 		$archive = new Archive_Tar($archive_file, 'gz');
 		$archive->create($files);
 
@@ -85,7 +85,7 @@ class Controller_CMS_Admin_Backups extends Controller_Admin {
 		// Change directory to /cache
 		chdir(DOCROOT);
 
-		$archive_file = APPPATH.'cache/'.$this->prefix.'files-'.date('Y-m-d-H.i.s').'.tar.gz';
+		$archive_file = APPPATH.'cache/'.$this->prefix.'files-'.date('YmdHis').'.tar.gz';
 		$archive = new Archive_Tar($archive_file, 'gz');
 		$archive->create($files);
 
