@@ -34,20 +34,24 @@ class Controller_CMS_Admin_Backups extends Controller_Admin {
 		foreach ($tables as $table)
 		{
 			$table = reset($table);
-			$file = APPPATH.'cache/'.$table.'.csv';
-			$files[] = $file;
 
-			$file = fopen($file, 'w');
-
-			$table_content = DB::query(Database::SELECT, 'SELECT * FROM '.$table)->execute()->as_array();
-
-			foreach ($table_content as $record)
+			if (strpos($table, Database::instance()->table_prefix()) === 0)
 			{
-				fputcsv($file, $record);
+				$file = APPPATH.'cache/'.$table.'.csv';
+				$files[] = $file;
+	
+				$file = fopen($file, 'w');
+	
+				$table_content = DB::query(Database::SELECT, 'SELECT * FROM '.$table)->execute()->as_array();
+	
+				foreach ($table_content as $record)
+				{
+					fputcsv($file, $record);
+				}
+	
+				unset($table_content);
+				fclose($file);
 			}
-
-			unset($table_content);
-			fclose($file);
 		}
 
 		// Create archive file from all CSV files
