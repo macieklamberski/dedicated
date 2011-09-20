@@ -37,25 +37,28 @@ class Controller_CMS_Admin_Backups extends Controller_Admin {
 
 			if (strpos($table, Database::instance()->table_prefix()) === 0)
 			{
-				$file = APPPATH.'cache/'.$table.'.csv';
+				// Change directory to /cache
+				chdir(APPPATH.'cache');
+
+				$file = $table.'.csv';
 				$files[] = $file;
-	
+
 				$file = fopen($file, 'w');
-	
+
 				$table_content = DB::query(Database::SELECT, 'SELECT * FROM '.$table)->execute()->as_array();
-	
+
 				foreach ($table_content as $record)
 				{
 					fputcsv($file, $record);
 				}
-	
+
 				unset($table_content);
 				fclose($file);
 			}
 		}
 
 		// Create archive file from all CSV files
-		$archive_file = APPPATH.'cache/'.$this->prefix.'database-'.date('Y-m-d-H.i.s').'.tar.gz';
+		$archive_file = $this->prefix.'database-'.date('Y-m-d-H.i.s').'.tar.gz';
 		$archive = new Archive_Tar($archive_file, 'gz');
 		$archive->create($files);
 
@@ -73,6 +76,14 @@ class Controller_CMS_Admin_Backups extends Controller_Admin {
 	{
 		// Scan all files
 		$files = self::array_flatten(Kohana::list_files('', array(DOCROOT)));
+
+    foreach ($files as &$file)
+    {
+      $file = str_replace(DOCROOT, '', $file);
+    }
+
+		// Change directory to /cache
+		chdir(DOCROOT);
 
 		$archive_file = APPPATH.'cache/'.$this->prefix.'files-'.date('Y-m-d-H.i.s').'.tar.gz';
 		$archive = new Archive_Tar($archive_file, 'gz');
