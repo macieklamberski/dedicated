@@ -8,7 +8,7 @@ class Controller_CMS_Admin_Backups extends Controller_Admin {
 	{
 		parent::before();
 
-		require Kohana::find_file('vendor', 'Archive/Tar');
+		require Kohana::find_file('vendor', 'Archive/Zip');
 
 		$this->prefix = URL::title(Settings::get('project_name')).'-';
 
@@ -58,8 +58,8 @@ class Controller_CMS_Admin_Backups extends Controller_Admin {
 		}
 
 		// Create archive file from all CSV files
-		$archive_file = $this->prefix.'database-'.date('YmdHis').'.tar.gz';
-		$archive = new Archive_Tar($archive_file, 'gz');
+		$archive_file = $this->prefix.'database-'.date('YmdHis').'.zip';
+		$archive = new Archive_Zip($archive_file, 'gz');
 		$archive->create($files);
 
 		// Delete CSV files
@@ -85,8 +85,8 @@ class Controller_CMS_Admin_Backups extends Controller_Admin {
 		// Change directory to /cache
 		chdir(DOCROOT);
 
-		$archive_file = APPPATH.'cache/'.$this->prefix.'files-'.date('YmdHis').'.tar.gz';
-		$archive = new Archive_Tar($archive_file, 'gz');
+		$archive_file = APPPATH.'cache/'.$this->prefix.'files-'.date('YmdHis').'.zip';
+		$archive = new Archive_Zip($archive_file, 'gz');
 		$archive->create($files);
 
 		// Send file to download
