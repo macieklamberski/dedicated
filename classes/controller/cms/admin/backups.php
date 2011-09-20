@@ -28,6 +28,11 @@ class Controller_CMS_Admin_Backups extends Controller_Admin {
 
 	public function action_database()
 	{
+		if (Kohana::$environment == Kohana::TESTING)
+		{
+			$this->request->redirect(Route::get('admin-backups')->uri());
+		}
+
 		$tables = DB::query(Database::SELECT, 'SHOW TABLES')->execute()->as_array();
 
 		// Create CSV file from each table data
@@ -74,13 +79,18 @@ class Controller_CMS_Admin_Backups extends Controller_Admin {
 
 	public function action_files()
 	{
+		if (Kohana::$environment == Kohana::TESTING)
+		{
+			$this->request->redirect(Route::get('admin-backups')->uri());
+		}
+
 		// Scan all files
 		$files = self::array_flatten(Kohana::list_files('', array(DOCROOT)));
 
-    foreach ($files as &$file)
-    {
-      $file = str_replace(DOCROOT, '', $file);
-    }
+		foreach ($files as &$file)
+		{
+			$file = str_replace(DOCROOT, '', $file);
+		}
 
 		// Change directory to /cache
 		chdir(DOCROOT);
