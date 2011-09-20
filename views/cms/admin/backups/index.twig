@@ -1,0 +1,33 @@
+{% extends "layouts/admin.twig" %}
+
+{% block subtitle "Kopie zapasowe"|trans %}
+
+{% block main %}
+  <header class="header header-page clearfix">
+    <h1 class="heading heading-page">{{ block("subtitle") }}</h1>
+  </header>
+
+  {% form.open current_uri, {"class":"form"} %}
+    <fieldset class="fields fields-plain">
+      <div class="field">
+        {% form.label null, "Baza danych"|trans, {"class":"label"} %}
+
+        <div class="clearfix">
+          <a href="{% url "admin-backups", {"action":"database"} %}" class="button button-positive left">{{ "Pobierz pliki CSV"|trans }}</a>
+        </div>
+
+        <p class="hint block">Dla każdej tabeli</p>
+      </div>
+
+      <div class="field">
+        {% form.label null, "Pliki"|trans, {"class":"label"} %}
+
+        <div class="clearfix">
+          <a href="{% url "admin-backups", {"action":"files"} %}" class="button button-positive left">{{ "Pobierz archiwum ZIP"|trans }}</a>
+        </div>
+
+        <p class="hint block"></p>
+      </div
+    </fieldset>
+  {% form.close 0 %}
+{% endblock %}
