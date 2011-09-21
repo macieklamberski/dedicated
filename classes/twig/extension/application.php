@@ -11,28 +11,28 @@ class Twig_Extension_Application extends Twig_Extension
 		);
 	}
 
-  public function getName()
-  {
-    return 'twig_application';
-  }
+	public function getName()
+	{
+		return 'twig_application';
+	}
 }
 
 function twig_fversion($filename)
 {
-  if ( ! file_exists($filename))
-  {
-    return $filename;
-  }
+	if ( ! file_exists($filename))
+	{
+		return $filename;
+	}
 
-  return $filename.'?'.filemtime($filename);
+	return $filename.'?'.filemtime($filename);
 }
 
 function twig_replace($string, $from = '', $to = '')
 {
-  return str_replace($from, $to, $string);
+	return str_replace($from, $to, $string);
 }
 
 function twig_route_name($route)
 {
-  return Route::name($route);
+	return Route::name($route);
 }
