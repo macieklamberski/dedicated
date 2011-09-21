@@ -9,7 +9,7 @@ class Controller_CMS_Admin_Backups extends Controller_Admin {
 		parent::before();
 
 		ini_set('max_execution_time', '3600');
-		ini_set('memory_limit', '1024M');
+		ini_set('memory_limit', '10240M');
 
 		require Kohana::find_file('vendor', 'Archive/Zip');
 
