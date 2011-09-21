@@ -49,7 +49,7 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 
 	public function action_index()
 	{
-		$query = Jelly::query(self::$_options['model_class'])->by_lang($this->request->param('lang'));
+		$query = Jelly::query(self::$_options['model_class'])->by_lang($this->request->param('records_lang'));
 
 		$this->pagination = Pagination::factory(array(
 			'group' => 'admin',
