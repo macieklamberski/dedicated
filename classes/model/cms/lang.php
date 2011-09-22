@@ -9,15 +9,16 @@ class Model_CMS_Lang extends Jelly_Model {
 		));
 
 		$meta->fields(array(
-			'id' => Jelly::field('primary'),
 			'name' => Jelly::field('string'),
 			'code' => Jelly::field('string'),
-			'position' => Jelly::field('integer'),
+			'position' => Jelly::field('integer', array(
+				'unique' => TRUE,
+			)),
 		));
 
 		$meta->primary_key('code');
 
-		$meta->sorting(array('position' => 'DESC', 'id' => 'DESC'));
+		$meta->sorting(array('position' => 'DESC'));
 	}
 
 }

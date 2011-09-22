@@ -4,17 +4,16 @@
 DROP TABLE IF EXISTS `langs`;
 
 CREATE TABLE `langs` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
   `code` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
   `position` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `langs` (`id`, `name`, `code`, `position`)
+INSERT INTO `langs` (`name`, `code`, `position`)
 VALUES
-	(1,'Polski','pl',2),
-	(2,'English','en',1);
+	('Polski','pl',2),
+	('English','en',1);
 
 
 # Dump of table settings
@@ -30,15 +29,15 @@ CREATE TABLE `settings` (
   PRIMARY KEY (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO `settings` (`id`, `key`, `value`, `default`, `editable`)
+INSERT INTO `settings` (`key`, `value`, `default`, `editable`)
 VALUES
-	(1,'project_name','','Project\'s name', 0),
-	(2,'site_title','','Project\'s name', 1),
-	(3,'site_description','',NULL, 1),
-	(4,'site_keywords','',NULL, 1),
-	(5,'site_default_lang','','pl', 1),
-	(6,'admin_password','',NULL, 1);
-	(5,'site_default_lang','','pl', 1),
+	('project_name','','Project\'s name', 0),
+	('site_title','','Project\'s name', 1),
+	('site_description','',NULL, 1),
+	('site_keywords','',NULL, 1),
+	('site_default_lang','','pl', 1),
+	('admin_password','',NULL, 1);
+	('site_default_lang','','pl', 1),
 
 
 # Dump of table translations

@@ -5,7 +5,9 @@ class Model_CMS_Setting extends Jelly_Model {
 	public static function initialize(Jelly_Meta $meta)
 	{
 		$meta->fields(array(
-			'key' => Jelly::field('string'),
+			'key' => Jelly::field('string', array(
+				'unique' => TRUE,
+			)),
 			'value' => Jelly::field('text'),
 			'default' => Jelly::field('text'),
 			'editable' => Jelly::field('boolean', array(
