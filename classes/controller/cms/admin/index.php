@@ -2,6 +2,6 @@
 
 class Controller_CMS_Admin_Index extends Controller_Admin {
 
-  public function action_index() {}
+	public function action_index() {}
 
 }

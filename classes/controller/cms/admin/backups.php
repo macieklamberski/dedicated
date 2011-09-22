@@ -8,6 +8,9 @@ class Controller_CMS_Admin_Backups extends Controller_Admin {
 	{
 		parent::before();
 
+		ini_set('max_execution_time', '3600');
+		ini_set('memory_limit', '10240M');
+
 		require Kohana::find_file('vendor', 'Archive/Zip');
 
 		$this->prefix = URL::title(Settings::get('project_name')).'-';

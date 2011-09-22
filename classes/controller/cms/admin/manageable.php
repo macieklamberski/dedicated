@@ -13,10 +13,10 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 		$default_options = array(
 			'model_class' => Inflector::singular($controller_name),
 			'model_table' => $controller_name,
-			'model_name'	 => ucfirst(Inflector::singular($controller_name)),
-			'messages'		 => array(
-				'add'		 => __(':model został pomyślnie dodany.'),
-				'edit'	 => __(':model został pomyślnie zaktualizowany.'),
+			'model_name'  => ucfirst(Inflector::singular($controller_name)),
+			'messages'    => array(
+				'add'    => __(':model został pomyślnie dodany.'),
+				'edit'   => __(':model został pomyślnie zaktualizowany.'),
 				'delete' => __(':model został pomyślnie usunięty.'),
 			),
 		);
@@ -24,10 +24,10 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 		self::$_options = array_merge($default_options, $options);
 
 		$this->template
-			->bind('errors',																 $this->errors)
-			->bind('pagination',														 $this->pagination)
-			->bind(self::$_options['model_class'],					 $this->record)
-			->bind(self::$_options['model_table'],					 $this->records)
+			->bind('errors',                                 $this->errors)
+			->bind('pagination',                             $this->pagination)
+			->bind(self::$_options['model_class'],           $this->record)
+			->bind(self::$_options['model_table'],           $this->records)
 			->bind(self::$_options['model_table'].'_count', $this->records_count);
 	}
 
@@ -49,7 +49,7 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 
 	public function action_index()
 	{
-		$query = Jelly::query(self::$_options['model_class'])->by_lang($this->request->param('lang'));
+		$query = Jelly::query(self::$_options['model_class'])->by_lang($this->request->param('records_lang'));
 
 		$this->pagination = Pagination::factory(array(
 			'group' => 'admin',
