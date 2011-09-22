@@ -17,7 +17,7 @@ class Controller_CMS_Application extends Controller_Template_Twig {
 			->bind('lang',        $lang)
 			->bind('langs',       $langs);
 
-		// Getting current environment's name
+		// Getting name of current environment
 		switch (Kohana::$environment)
 		{
 			case Kohana::PRODUCTION:
