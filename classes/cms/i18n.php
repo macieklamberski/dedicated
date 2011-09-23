@@ -3,6 +3,7 @@
 class CMS_I18n extends Kohana_I18n {
 
 	protected static $_translations;
+	protected static $_loaded;
 
 	public static function get($string, $lang = NULL)
 	{
@@ -12,8 +13,10 @@ class CMS_I18n extends Kohana_I18n {
 		}
 
 		// Caching loaded translations
-		if (empty(self::$_translations[$lang]))
+		if ( ! self::$_loaded)
 		{
+			self::$_loaded = TRUE;
+
 			$translations = DB::select()
 				->from('translations')
 				->join('langs', 'LEFT')
