@@ -11,6 +11,7 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 		$controller_name = strtolower(str_replace('Controller_Admin_', '', get_class($this)));
 
 		$default_options = array(
+			'index_route' => 'admin-'.$controller_name.'-index',
 			'model_class' => Inflector::singular($controller_name),
 			'model_table' => $controller_name,
 			'model_name'  => ucfirst(Inflector::singular($controller_name)),
@@ -45,6 +46,15 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 		}
 
 		Session::instance()->set('affected_ids', array($this->record->id()));
+	}
+
+	protected function redirect_back_or_index()
+	{
+		$url = Session::instance()->get('back')
+			? Session::instance()->get('back')
+			: Route::get(Arr::get(self::$_options, 'index_route'))->uri();
+
+		$this->request->redirect($url);
 	}
 
 	public function action_index()
@@ -92,7 +102,7 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 
 				Hint::set(Hint::SUCCESS, self::$_options['messages']['add'], array(':model' => self::$_options['model_name']));
 
-				$this->request->redirect(Session::instance()->get('back'));
+				$this->redirect_back_or_index();
 			}
 			catch (Jelly_Validation_Exception $e)
 			{
@@ -123,7 +133,7 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 
 				Hint::set(Hint::SUCCESS, self::$_options['messages']['edit'], array(':model' => self::$_options['model_name']));
 
-				$this->request->redirect(Session::instance()->get('back'));
+				$this->redirect_back_or_index();
 			}
 			catch (Jelly_Validation_Exception $e)
 			{
@@ -140,7 +150,7 @@ abstract class Controller_CMS_Admin_Manageable extends Controller_Admin {
 
 		Hint::set(Hint::SUCCESS, self::$_options['messages']['delete'], array(':model' => self::$_options['model_name']));
 
-		$this->request->redirect(Session::instance()->get('back'));
+		$this->redirect_back_or_index();
 	}
 
 }
