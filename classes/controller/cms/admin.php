@@ -19,7 +19,7 @@ class Controller_CMS_Admin extends Controller_Application {
 		// Set default number of records per page
 		if (isset($_GET['per_page']))
 		{
-			Session::instance()->set('per_page', $_GET['per_page'] == 'all' ? 2147483647 : $_GET['per_page']);
+			Session::instance()->set('per_page', $this->request->query('per_page') == 'all' ? 2147483647 : $this->request->query('per_page'));
 
 			$this->request->redirect(Request::detect_uri());
 		}
