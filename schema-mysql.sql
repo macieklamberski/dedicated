@@ -36,8 +36,8 @@ VALUES
 	('site_description','',NULL, 1),
 	('site_keywords','',NULL, 1),
 	('site_default_lang','','pl', 1),
-	('admin_password','',NULL, 1);
-	('site_default_lang','','pl', 1),
+	('admin_password','',NULL, 1),
+	('admin_default_lang','','pl', 1);
 
 
 # Dump of table translations
