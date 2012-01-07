@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_CMS_Admin_Media extends Controller {
+class Controller_CMF_Admin_Media extends Controller {
 
   public function action_show()
   {

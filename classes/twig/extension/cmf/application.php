@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Twig_Extension_CMS_Application extends Twig_Extension {
+class Twig_Extension_CMF_Application extends Twig_Extension {
 
 	public function getFilters()
 	{

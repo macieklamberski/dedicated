@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Model_CMS_Translation extends Jelly_Model {
+class Model_CMF_Translation extends Jelly_Model {
 
 	public static function initialize(Jelly_Meta $meta)
 	{

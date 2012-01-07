@@ -1,5 +1,5 @@
 /*
- *  Kohana CMS (September 2011)
+ *  Kohana CMF (September 2011)
  *  Crafted with passion by http://lamberski.com
  */
 Padamini.enableLangTabs = function() {

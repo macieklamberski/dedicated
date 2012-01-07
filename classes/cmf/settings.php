@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class CMS_Settings {
+class CMF_Settings {
 
 	protected static $settings = array();
 	protected static $defaults = array();

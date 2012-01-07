@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_CMS_Admin_Backups extends Controller_Admin {
+class Controller_CMF_Admin_Backups extends Controller_Admin {
 
 	protected $prefix;
 
