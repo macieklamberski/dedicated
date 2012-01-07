@@ -2,6 +2,13 @@
 
 class Controller_CMF_Site extends Controller_Application {
 
+	public function before()
+	{
+		parent::before();
+
+		I18n::db_mode(TRUE);
+	}
+
 	public function after()
 	{
 		$this->template
