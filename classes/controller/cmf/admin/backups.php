@@ -15,7 +15,7 @@ class Controller_CMF_Admin_Backups extends Controller_Admin {
 
 		$this->prefix = URL::title(Settings::get('project_name')).'-';
 
-		// Deleting old backup files
+		// Delete old backup files
 		$backups = array_merge(
 			glob(APPPATH.'cache/'.$this->prefix.'files-*'),
 			glob(APPPATH.'cache/'.$this->prefix.'database-*')
@@ -31,6 +31,7 @@ class Controller_CMF_Admin_Backups extends Controller_Admin {
 
 	public function action_database()
 	{
+		// Disable creating backups on testing environment
 		if (Kohana::$environment == Kohana::TESTING)
 		{
 			$this->request->redirect(Route::get('admin-backups')->uri());
@@ -45,7 +46,7 @@ class Controller_CMF_Admin_Backups extends Controller_Admin {
 
 			if (strpos($table, Database::instance()->table_prefix()) === 0)
 			{
-				// Change directory to /cache
+				// Change directory to /cache.
 				chdir(APPPATH.'cache');
 
 				$file = $table.'.csv';
@@ -70,13 +71,13 @@ class Controller_CMF_Admin_Backups extends Controller_Admin {
 		$archive = new Archive_Zip($archive_file, 'gz');
 		$archive->create($files);
 
-		// Delete CSV files
+		// Delete CSV files.
 		foreach ($files as $file)
 		{
 			@unlink($file);
 		}
 
-		// Send file to download
+		// Send file to browser.
 		$this->response->send_file($archive_file);
 	}
 
@@ -87,7 +88,7 @@ class Controller_CMF_Admin_Backups extends Controller_Admin {
 			$this->request->redirect(Route::get('admin-backups')->uri());
 		}
 
-		// Scan all files
+		// Scan all directories to find all files
 		$files = self::array_flatten(Kohana::list_files('', array(DOCROOT)));
 
 		foreach ($files as &$file)
@@ -102,7 +103,7 @@ class Controller_CMF_Admin_Backups extends Controller_Admin {
 		$archive = new Archive_Zip($archive_file, 'gz');
 		$archive->create($files);
 
-		// Send file to download
+		// Send file to browser
 		$this->response->send_file($archive_file);
 	}
 
