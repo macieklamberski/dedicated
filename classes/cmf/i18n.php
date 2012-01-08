@@ -24,7 +24,7 @@ class CMF_I18n extends Kohana_I18n {
 		}
 
 		// Getting translation in normal way (from file)
-		if ( ! I18n::db_mode())
+		if ( ! I18n::db_mode() || ! Kohana::$config->load('cmf.db_i18n'))
 		{
 			return parent::get($string, $lang);
 		}
