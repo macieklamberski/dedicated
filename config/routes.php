@@ -1,9 +1,10 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
+$route_prefix = trim(Kohana::$config->load('cmf.route_prefix'), '/');
+
 //-- Admin ---------------------------------------------------------------------
 
-/* Assets */
-
+// Media
 Route::set('admin-media-padamni', 'padamini(/<file>)', array('file' => '.+'))
 	->defaults(array(
 		'directory'  => 'admin',
@@ -13,7 +14,7 @@ Route::set('admin-media-padamni', 'padamini(/<file>)', array('file' => '.+'))
 		'file'       => NULL,
 	));
 
-Route::set('admin-media-cms', 'cms/scripts/cms.js', array('file' => '.+'))
+Route::set('admin-media-cms', $route_prefix.'/scripts/cms.js', array('file' => '.+'))
 	->defaults(array(
 		'directory'  => 'admin',
 		'controller' => 'media',
@@ -22,17 +23,15 @@ Route::set('admin-media-cms', 'cms/scripts/cms.js', array('file' => '.+'))
 		'file'       => '/scripts/cms.js',
 	));
 
-/* Index */
-
-Route::set('admin-index', 'cms')
+// Index
+Route::set('admin-index', $route_prefix)
 	->defaults(array(
 		'directory'  => 'admin',
 		'controller' => 'index',
 	));
 
-/* Backups */
-
-Route::set('admin-backups', 'cms/backups(/<action>)', array(
+// Backups
+Route::set('admin-backups', $route_prefix.'/backups(/<action>)', array(
 		'action' => 'database|files',
 	))
 	->defaults(array(
@@ -40,27 +39,25 @@ Route::set('admin-backups', 'cms/backups(/<action>)', array(
 		'controller' => 'backups',
 	));
 
-/* Session */
-
-Route::set('admin-session-login', 'cms/login')
+// Session
+Route::set('admin-session-login', $route_prefix.'/login')
 	->defaults(array(
 		'directory'  => 'admin',
 		'controller' => 'session',
 		'action'     => 'login',
 	));
 
-Route::set('admin-session-logout', 'cms/logout')
+Route::set('admin-session-logout', $route_prefix.'/logout')
 	->defaults(array(
 		'directory'  => 'admin',
 		'controller' => 'session',
 		'action'     => 'logout',
 	));
 
-/* Settings and Translations */
-
+// Settings and Translations
 foreach (array('settings', 'translations') as $module)
 {
-	Route::set('admin-'.$module.'-index', 'cms/'.$module)
+	Route::set('admin-'.$module.'-index', $route_prefix.'/'.$module)
 		->defaults(array(
 			'directory'  => 'admin',
 			'controller' => $module,
