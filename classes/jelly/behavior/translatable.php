@@ -10,7 +10,7 @@ class Jelly_Behavior_Translatable extends Jelly_Behavior {
 		// Find and gather all translatable fields in model
 		foreach ($meta->fields() as $name => $field)
 		{
-			if (isset($field->translate) && $field->translate)
+			if (isset($field->translatable) && $field->translatable)
 			{			
 				// Remember translatable fields
 				$this->_fields[] = $name;

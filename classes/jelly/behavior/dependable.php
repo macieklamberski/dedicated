@@ -20,7 +20,7 @@ class Jelly_Behavior_Dependable extends Jelly_Behavior {
 			{
 				// Delete all image files associated with field
 				case 'Jelly_Field_Image':
-					if (isset($field->dependent) && $field->dependent)
+					if (isset($field->dependable) && $field->dependable)
 					{
 						$filename = $model->{$name};
 						$images = array_merge($field->thumbnails, array($field));
@@ -39,7 +39,7 @@ class Jelly_Behavior_Dependable extends Jelly_Behavior {
 
 				// Delete file associated with field
 				case 'Jelly_Field_File':
-					if (isset($field->dependent) && $field->dependent)
+					if (isset($field->dependable) && $field->dependable)
 					{
 						$filepath = $field->path.$model->{$name};
 
@@ -52,7 +52,7 @@ class Jelly_Behavior_Dependable extends Jelly_Behavior {
 
 				// Delete dependent HasOne association
 				case 'Jelly_Field_HasOne':
-					if (isset($field->dependent) && $field->dependent)
+					if (isset($field->dependable) && $field->dependable)
 					{
 						$model->{$name}->delete();
 					}
@@ -60,7 +60,7 @@ class Jelly_Behavior_Dependable extends Jelly_Behavior {
 
 				// Delete dependent HasMany association
 				case 'Jelly_Field_HasMany':
-					if (isset($field->dependent) && $field->dependent)
+					if (isset($field->dependable) && $field->dependable)
 					{
 						foreach ($model->{$name} as $dependent)
 						{

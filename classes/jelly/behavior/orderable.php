@@ -8,7 +8,7 @@ class Jelly_Behavior_Orderable extends Jelly_Behavior {
 	{
 		foreach ($meta->fields() as $name => $field)
 		{
-			if (property_exists($field, 'order'))
+			if (property_exists($field, 'orderable'))
 			{
 				// Remember orderable fields
 				$this->_fields[] = $name;
