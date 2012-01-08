@@ -4,16 +4,16 @@ class CMF_I18n extends Kohana_I18n {
 
 	protected static $_translations;
 	protected static $_loaded;
-	protected static $_db_mode = FALSE;
+	protected static $_source = 'file';
 
-	public static function db_mode($value = NULL)
+	public static function source($source = NULL)
 	{
-		if ($value)
+		if ($source)
 		{
-			self::$_db_mode = (bool) $value;
+			self::$_source = $source;
 		}
 
-		return I18n::$_db_mode;
+		return I18n::$_source;
 	}
 
 	public static function get($string, $lang = NULL)
@@ -24,7 +24,7 @@ class CMF_I18n extends Kohana_I18n {
 		}
 
 		// Getting translation in normal way (from file)
-		if ( ! I18n::db_mode() || ! Kohana::$config->load('cmf.db_i18n'))
+		if ( ! I18n::source() == 'file')
 		{
 			return parent::get($string, $lang);
 		}

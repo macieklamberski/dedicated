@@ -6,7 +6,7 @@ class Controller_CMF_Site extends Controller_Application {
 	{
 		parent::before();
 
-		I18n::db_mode(TRUE);
+		I18n::source('db');
 	}
 
 	public function after()

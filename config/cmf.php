@@ -2,5 +2,4 @@
 
 return array(
 	'route_prefix' => 'cms',
-	'db_i18n'      => FALSE,
 );
