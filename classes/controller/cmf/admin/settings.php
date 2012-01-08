@@ -29,7 +29,7 @@ class Controller_CMF_Admin_Settings extends Controller_Admin {
 					->update();
 			}
 
-			Hint::set(Hint::SUCCESS, __('Ustawienia zostały zapisane.'));
+			Hint::set(Hint::SUCCESS, __('admin.settings.updated'));
 
 			$this->request->redirect(Route::get('admin-settings-index')->uri());
 		}

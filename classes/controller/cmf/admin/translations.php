@@ -34,7 +34,7 @@ class Controller_CMF_Admin_Translations extends Controller_Admin {
 				}
 			}
 
-			Hint::set(Hint::SUCCESS, __('Tłumaczenia zostały zapisane.'));
+			Hint::set(Hint::SUCCESS, __('admin.translations.updated'));
 
 			$this->request->redirect(Route::get('admin-translations-index')->uri());
 		}

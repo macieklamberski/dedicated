@@ -16,9 +16,9 @@ abstract class Controller_CMF_Admin_Manageable extends Controller_Admin {
 			'model_table' => $controller_name,
 			'model_name'  => ucfirst(Inflector::singular($controller_name)),
 			'messages'    => array(
-				'add'    => __(':model został pomyślnie dodany.'),
-				'edit'   => __(':model został pomyślnie zaktualizowany.'),
-				'delete' => __(':model został pomyślnie usunięty.'),
+				'add'    => __('admin.model.added'),
+				'edit'   => __('admin.model.updated'),
+				'delete' => __('admin.model.deleted'),
 			),
 		);
 
