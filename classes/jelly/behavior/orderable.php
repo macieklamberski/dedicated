@@ -13,9 +13,9 @@ class Jelly_Behavior_Orderable extends Jelly_Behavior {
 				// Remember orderable fields
 				$this->_fields[] = $name;
 
-				$field->order = array(
-					'min_value' => Arr::get($field->order, 'min_value', 1),
-					'max_value' => Arr::get($field->order, 'max_value', 2147483647),
+				$field->orderable = array(
+					'min_value' => Arr::get($field->orderable, 'min_value', 1),
+					'max_value' => Arr::get($field->orderable, 'max_value', 2147483647),
 				);
 			}
 		}

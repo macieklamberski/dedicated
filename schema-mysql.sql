@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS `langs`;
 CREATE TABLE `langs` (
   `code` varchar(255) NOT NULL,
   `name` varchar(255),
-  `position` int(11),
+  `order` int(11),
   PRIMARY KEY (`code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
