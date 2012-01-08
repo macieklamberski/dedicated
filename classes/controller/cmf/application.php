@@ -52,7 +52,9 @@ class Controller_CMF_Application extends Controller_Template_Twig {
 		// If current language is not found in database, show 404 page
 		if (empty($this->lang))
 		{
-			throw new HTTP_Exception_404;
+			throw new HTTP_Exception_404('Language ":lang" does not exist on list available languages for this website.', array(
+				':lang' => $this->request->param('lang'),
+			));
 		}
 	}
 
