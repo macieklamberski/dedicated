@@ -4,11 +4,13 @@ class Jelly_Meta extends Jelly_Core_Meta {
 
 	public function finalize($model)
 	{
-		// Loading the default Jelly_Builder to include the additional features
-		if (empty($this->_behaviors))
-		{
-			$this->behaviors(array(new Jelly_Behavior));
-		}
+		// Include all special behaviors
+		$this->behaviors(array(
+			Jelly::behavior('dependable'),
+			Jelly::behavior('orderable'),
+			Jelly::behavior('sluggable'),
+			Jelly::behavior('translatable'),
+		));
 
 		parent::finalize($model);
 	}

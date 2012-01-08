@@ -5,11 +5,20 @@ class Jelly_Behavior_Translatable extends Jelly_Behavior {
 	protected static $_langs = array();
 	public $_fields = array();
 
-	public function __construct($params = array())
+	public function meta_before_finalize($meta)
 	{
-		parent::__construct($params);
+		// Find and gather all translatable fields in model
+		foreach ($meta->fields() as $name => $field)
+		{
+			if (isset($field->translate) && $field->translate)
+			{			
+				// Remember translatable fields
+				$this->_fields[] = $name;
+			}
+		}
 
-		if (empty(self::$_langs))
+		// Load and remember all languages if model is translatable
+		if ( ! empty($this->_fields) && empty(self::$_langs))
 		{
 			$langs = Jelly::query('lang')->select();
 
@@ -18,13 +27,11 @@ class Jelly_Behavior_Translatable extends Jelly_Behavior {
 				self::$_langs[$lang->code] = $lang->name;
 			}
 		}
-	}
 
-	public function meta_before_finalize($meta)
-	{
+		// Cerate temporary translatable field
 		foreach ($meta->fields() as $name => $field)
 		{
-			if (in_array($name, $this->_fields))
+			if (in_array($name, self::$_langs))
 			{
 				// Setting main translation field as not in database
 				$field->in_db = FALSE;
@@ -48,9 +55,7 @@ class Jelly_Behavior_Translatable extends Jelly_Behavior {
 
 	public function model_call_clear_translated_fields($model)
 	{
-		$meta = $model->meta();
-
-		foreach ($meta->fields() as $name => $field)
+		foreach ($model->meta()->fields() as $name => $field)
 		{
 			if (in_array($name, $this->_fields))
 			{
@@ -62,6 +67,12 @@ class Jelly_Behavior_Translatable extends Jelly_Behavior {
 
 	public function model_call_load_translations($model)
 	{
+		// Stop if in model there's no translatable fields
+		if (empty($this->_fields))
+		{
+			return FALSE;
+		}
+
 		$translations = DB::select()
 			->from($model->meta()->table().'_translations')
 			->where('record_id', '=', $model->id())
