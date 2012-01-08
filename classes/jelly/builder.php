@@ -21,7 +21,10 @@ class Jelly_Builder extends Jelly_Core_Builder {
 			return $record;
 		}
 
-		throw new HTTP_Exception_404;
+		throw new HTTP_Exception_404(':model looked in query ":query" was not found in the database.', array(
+			':model' => ucfirst(Inflector::humanize($this->_model)),
+			':query' => Database::instance()->last_query,
+		));
 	}
 
 	public function paginate(Pagination $pagination)
