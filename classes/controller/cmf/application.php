@@ -36,7 +36,7 @@ class Controller_CMF_Application extends Controller_Template_Twig {
 
 		$langs = Jelly::query('lang')->select();
 
-		$current_lang = $this->request->param('lang', Settings::get($this->request->directory().'_default_lang'));
+		$current_lang = $this->request->param('lang', Settings::get(($this->request->directory() ? $this->request->directory() : 'site').'_default_lang'));
 
 		foreach ($langs as $lang)
 		{
@@ -53,7 +53,7 @@ class Controller_CMF_Application extends Controller_Template_Twig {
 		if (empty($this->lang))
 		{
 			throw new HTTP_Exception_404('Language ":lang" does not exist on list available languages for this website.', array(
-				':lang' => $this->request->param('lang'),
+				':lang' => $current_lang,
 			));
 		}
 	}
