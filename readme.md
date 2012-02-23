@@ -14,7 +14,3 @@ Kohana CMF uses few external Kohana modules which need to be included in your ap
 * [Jelly](http://github.com/creatoro/jelly/) - ORM layer,
 * [Database](http://github.com/kohana/database/) - official database module for Kohana
 * [Auth](http://github.com/kohana/auth/) - official auth module for Kohana.
-
-## License
-
-Padamini is dually licensed under the MIT or GPL Version 2.
