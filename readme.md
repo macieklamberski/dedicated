@@ -6,10 +6,9 @@ Kohana CMF (Content Management Framework) is a set of base funcionality for crea
 
 Kohana CMF uses [Padamini](http://github.com/lamberski/padamini/) as user interface layer.
 
-
 ## Requirements
 
-Kohana CMF uses few external Kohana modules which need to be included in your application's bootstrap to run everything without errors. These are:
+Kohana CMF uses few external Kohana modules which are required to run everything smoothly:
 
 * [Jelly](http://github.com/creatoro/jelly/) - ORM layer,
 * [Database](http://github.com/kohana/database/) - official database module for Kohana
