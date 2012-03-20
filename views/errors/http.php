@@ -8,7 +8,7 @@
       a    { color: #777 }
       h1   { font-size: 24px; color: #555; margin: 0 0 15px }
       p    { font-size: 16px; color: #999; margin: 0 }
-      img  { margin-bottom: 20px }
+      img  { margin-bottom: 20px; border: 0 }
     </style>
   </head>
   <body>
