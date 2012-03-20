@@ -5,8 +5,8 @@ class Twig_Extension_CMF_Application extends Twig_Extension {
 	public function getFilters()
 	{
 		return array(
-			'fversion' => new Twig_Filter_Function('twig_fversion'),
-			'replace' => new Twig_Filter_Function('twig_replace'),
+			'fversion'   => new Twig_Filter_Function('twig_fversion'),
+			'replace'    => new Twig_Filter_Function('twig_replace'),
 			'route_name' => new Twig_Filter_Function('twig_route_name'),
 		);
 	}
