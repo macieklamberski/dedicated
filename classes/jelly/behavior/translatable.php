@@ -11,7 +11,7 @@ class Jelly_Behavior_Translatable extends Jelly_Behavior {
 		foreach ($meta->fields() as $name => $field)
 		{
 			if (isset($field->translatable) && $field->translatable)
-			{			
+			{
 				// Remember translatable fields
 				$this->_fields[] = $name;
 			}

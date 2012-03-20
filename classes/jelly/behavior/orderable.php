@@ -29,7 +29,7 @@ class Jelly_Behavior_Orderable extends Jelly_Behavior {
 			{
 				$query = DB::select(DB::expr('MAX('.$field.') + 1'))
 					->from($model->meta()->table());
-	
+
 				if ( ! empty($this->_conditions))
 				{
 					foreach ($this->_conditions as $condition)
@@ -37,11 +37,11 @@ class Jelly_Behavior_Orderable extends Jelly_Behavior {
 						$query->where($condition[0], $condition[1], $condition[2]);
 					}
 				}
-	
+
 				$position = $query
 					->execute()
 					->get('MAX('.$field.') + 1');
-	
+
 				$model->{$field} = max($this->_min_position, $position);
 			}
 		}
