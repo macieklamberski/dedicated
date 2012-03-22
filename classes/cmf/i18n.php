@@ -24,7 +24,7 @@ class CMF_I18n extends Kohana_I18n {
 		}
 
 		// Getting translation in normal way (from file)
-		if ( ! I18n::source() == 'file')
+		if (I18n::source() == 'file')
 		{
 			return parent::get($string, $lang);
 		}
