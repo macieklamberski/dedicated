@@ -35,9 +35,7 @@ class CMF_I18n extends Kohana_I18n {
 			self::$_loaded = TRUE;
 
 			$translations = DB::select()
-				->from('translations')
-				->join('langs', 'LEFT')
-				->on('langs.code', '=', 'translations.lang_id')
+				->from('i18n')
 				->where('langs.code', '=', $lang)
 				->as_object()
 				->execute();
