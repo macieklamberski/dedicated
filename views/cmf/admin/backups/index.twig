@@ -1,0 +1,47 @@
+{% extends "layouts/admin.twig" %}
+
+{% block subtitle "Eksport danych"|trans %}
+
+{% block main %}
+  <header class="header header-page clearfix">
+    <h1 class="heading heading-page">{{ block("subtitle") }}</h1>
+  </header>
+
+  {% if environment in ["development", "testing"] %}
+    <div class="message message-warning">
+      <p>Możliwość eksportu danych jest na razie wyłączona. Będzie ona dostępna dopiero po wdrożeniu aplikacji na serwer produkcyjny.</p>
+    </div>
+  {% endif %}
+
+  {% form.open current_uri, {"class":"form"} %}
+    <fieldset class="fields fields-plain">
+      <div class="field">
+        {% form.label null, "Baza danych"|trans, {"class":"label"} %}
+
+        <div class="clearfix">
+          {% if environment in ["development", "testing"] %}
+            <span class="button button-disabled left">{{ "Pobierz archiwum ZIP z danymi tabel"|trans }}</span>
+          {% else %}
+            <a href="{% url "admin-backups", {"action":"database"} %}" class="button left">{{ "Pobierz archiwum ZIP z danymi tabel"|trans }}</a>
+          {% endif %}
+        </div>
+
+        <p class="hint block">Dla każdej tabeli zostanie wygenerowany plik z danymi w formacie <a href="http://pl.wikipedia.org/wiki/CSV_(format_pliku)" rel="external">CSV</a>. Wszystkie pliki z danymi tabel będą spakowane i wysłane do pobrania jako archiwum ZIP (które można otworzyć za pomocą większości aplikacji do kompresji plików).</p>
+      </div>
+
+      <div class="field">
+        {% form.label null, "Pliki"|trans, {"class":"label"} %}
+
+        <div class="clearfix">
+          {% if environment in ["development", "testing"] %}
+            <span class="button button-disabled left">{{ "Pobierz archiwum ZIP z plikami witryny"|trans }}</span>
+          {% else %}
+            <a href="{% url "admin-backups", {"action":"files"} %}" class="button left">{{ "Pobierz archiwum ZIP z plikami witryny"|trans }}</a>
+          {% endif %}
+        </div>
+
+        <p class="hint block">Wszystkie pliki należące do aplikacji (pliki systemowe, cache, logi oraz wszystkie pliki zamieszczone za pomocą CMF-a) zostaną spakowane i wysłane do pobrania jako archiwum ZIP (które można otworzyć za pomocą większości aplikacji do kompresji plików).</p>
+      </div
+    </fieldset>
+  {% form.close 0 %}
+{% endblock %}

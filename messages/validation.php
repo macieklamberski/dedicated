@@ -2,6 +2,7 @@
 
 switch (I18n::lang())
 {
+	// Polish translation
 	case 'pl':
 		return array(
 			'alpha'             => 'Pole <strong>:field</strong> musi składać się wyłącznie z liter',
@@ -33,6 +34,8 @@ switch (I18n::lang())
 			'Upload::size'      => 'Plik podany w polu <strong>:field</strong> jest za duży',
 		);
 	break;
+
+	// Default english translation
 	default:
 		return array(
 			'alpha'             => '<strong>:field</strong> must contain only letters',
