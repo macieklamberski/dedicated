@@ -6,16 +6,18 @@ class Controller_CMF_Application extends Controller_Template_Twig {
 	{
 		parent::before();
 
+		$current_uri = Request::detect_uri() ? Request::detect_uri() : Kohana::$base_url;
+
 		$this->template
-			->set('current_uri',  Request::detect_uri() ? Request::detect_uri() : Kohana::$base_url)
-			->set('current_url',  preg_replace('#'.Request::detect_uri().'$#', '', URL::base('http')))
+			->set('current_uri',  $current_uri)
+			->set('current_url',  preg_replace('#'.$current_uri.'$#', '', URL::base('http')))
 			->set('base_uri',     Kohana::$base_url)
 			->set('base_url',     preg_replace('#'.Kohana::$base_url.'$#', '', URL::base('http')))
-			->set('settings',     Settings::get())
 			->bind('request',     $this->request)
 			->bind('environment', $environment)
 			->bind('lang',        $lang)
-			->bind('langs',       $langs);
+			->bind('langs',       $langs)
+			->bind('settings',    $settings);
 
 		// Getting name of current environment
 		switch (Kohana::$environment)
@@ -32,6 +34,11 @@ class Controller_CMF_Application extends Controller_Template_Twig {
 			case Kohana::DEVELOPMENT:
 				$environment = 'development';
 			break;
+		}
+
+		if (Kohana::$config->load('cmf')->modules->settings)
+		{
+			$settings = Settings::get();
 		}
 
 		$langs = Jelly::query('lang')->select();

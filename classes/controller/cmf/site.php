@@ -6,7 +6,10 @@ class Controller_CMF_Site extends Controller_Application {
 	{
 		parent::before();
 
-		I18n::source('db');
+		if (Kohana::$config->load('cmf')->modules->i18n)
+		{
+			I18n::source('db');
+		}
 	}
 
 	public function after()
