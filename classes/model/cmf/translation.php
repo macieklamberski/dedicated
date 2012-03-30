@@ -11,6 +11,8 @@ class Model_CMF_Translation extends Jelly_Model {
 			'value' => Jelly::field('text'),
 		));
 
+		$meta->table('i18n');
+
 		$meta->load_with(array('lang'));
 	}
 
