@@ -39,29 +39,35 @@ class Controller_CMF_Application extends Controller_Template_Twig {
 		if (Kohana::$config->load('cmf')->modules->settings)
 		{
 			$settings = Settings::get();
+
+			I18n::lang(Settings::get($this->request->directory().'_default_lang');
 		}
 
-		$langs = Jelly::query('lang')->select();
-
-		$current_lang = $this->request->param('lang', Settings::get(($this->request->directory() ? $this->request->directory() : 'site').'_default_lang'));
-
-		foreach ($langs as $lang)
+		if (Kohana::$config->load('cmf')->modules->multilanguage)
 		{
-			if ($current_lang == $lang->code)
+			$langs = Jelly::query('lang')->select();
+
+			$current_lang = $this->request->param('lang', I18n::lang());
+
+			foreach ($langs as $lang)
 			{
-				$this->lang = $lang;
-				I18n::lang($lang->code);
+				if ($current_lang == $lang->code)
+				{
+					$this->lang = $lang;
 
-				break;
+					I18n::lang($lang->code);
+
+					break;
+				}
 			}
-		}
 
-		// If current language is not found in database, show 404 page
-		if (empty($this->lang))
-		{
-			throw new HTTP_Exception_404('Language ":lang" does not exist on list available languages for this website.', array(
-				':lang' => $current_lang,
-			));
+			// If current language is not found in database, show 404 page
+			if (empty($this->lang))
+			{
+				throw new HTTP_Exception_404('Language ":lang" does not exist on list of supported languages.', array(
+					':lang' => $current_lang,
+				));
+			}
 		}
 	}
 
