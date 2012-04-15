@@ -1,18 +1,16 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-$route_prefix = trim(Kohana::$config->load('cmf.route_prefix'), '/');
-
 //-- Admin ---------------------------------------------------------------------
 
 // Index
-Route::set('admin-index', $route_prefix)
+Route::set('admin-index', 'cms')
 	->defaults(array(
 		'directory'  => 'admin',
 		'controller' => 'index',
 	));
 
 // Backups
-Route::set('admin-backups-index', $route_prefix.'/backups(/<action>)', array(
+Route::set('admin-backups-index', 'cms/backups(/<action>)', array(
 		'action' => 'database|files',
 	))
 	->defaults(array(
@@ -20,29 +18,32 @@ Route::set('admin-backups-index', $route_prefix.'/backups(/<action>)', array(
 		'controller' => 'backups',
 	));
 
-// Session
-Route::set('admin-session-login', $route_prefix.'/login')
+// Login
+Route::set('admin-session-login', 'cms/login')
 	->defaults(array(
 		'directory'  => 'admin',
 		'controller' => 'session',
 		'action'     => 'login',
 	));
-
-Route::set('admin-session-logout', $route_prefix.'/logout')
+	
+// Logout
+Route::set('admin-session-logout', 'cms/logout')
 	->defaults(array(
 		'directory'  => 'admin',
 		'controller' => 'session',
 		'action'     => 'logout',
 	));
 
-// Settings and Translations
-foreach (array('settings', 'translations') as $module)
-{
-	Route::set('admin-'.$module.'-index', $route_prefix.'/'.$module)
-		->defaults(array(
-			'directory'  => 'admin',
-			'controller' => $module,
-		));
-}
+// Settings
+Route::set('admin-settings-index', 'cms/settings')
+	->defaults(array(
+		'directory'  => 'admin',
+		'controller' => 'settings',
+	));
 
-return array();
+// Translations
+Route::set('admin-translations-index', 'cms/translations')
+	->defaults(array(
+		'directory'  => 'admin',
+		'controller' => 'translations',
+	));
