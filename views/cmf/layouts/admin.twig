@@ -1,25 +1,21 @@
-{% extends "layouts/application.twig" %}
-
 {% import "helpers/admin.twig" as h %}
+<!DOCTYPE html>
+<!--[if IE 8]>         <html lang="{{ lang.code|default("en") }}" class="no-js ie8"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="{{ lang.code|default("en") }}" class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% block subtitle %}{% endblock %} | {{ settings.project_name }} CMS{% endblock %}</title>
+    <link href="styles/padamini.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-{% block title %}{% block subtitle %}{% endblock %} | {{ settings.project_name }} CMF{% endblock %}
-
-{% block head %}
-  <link href="{{ base_uri~"padamini/styles/boxy.css"|fversion }}" rel="stylesheet">
-  <link href="{{ base_uri~"padamini/styles/jwysiwyg.css"|fversion }}" rel="stylesheet">
-  <link href="{{ base_uri~"padamini/styles/padamini.css"|fversion }}" rel="stylesheet">
-  <link href="{{ base_uri~"padamini/styles/main.css"|fversion }}" rel="stylesheet">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
-  <script src="{{ base_uri~"padamini/scripts/boxy/src/javascripts/jquery.boxy.js"|fversion }}"></script>
-  <script src="{{ base_uri~"padamini/scripts/jwysiwyg/jquery.wysiwyg.js"|fversion }}"></script>
-  <script src="{{ base_uri~"padamini/scripts/jwysiwyg/controls/wysiwyg.colorpicker.js"|fversion }}"></script>
-  <script src="{{ base_uri~"padamini/scripts/jwysiwyg/controls/wysiwyg.image.js"|fversion }}"></script>
-  <script src="{{ base_uri~"padamini/scripts/jwysiwyg/controls/wysiwyg.link.js"|fversion }}"></script>
-  <script src="{{ base_uri~"padamini/scripts/padamini.js"|fversion }}"></script>
-  <script src="{{ base_uri~"cmf/scripts/cmf.js"|fversion }}"></script>
-  <script src="{{ base_uri~"padamini/scripts/main.js"|fversion }}"></script>
-{% endblock %}
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+    <script src="{{ base_uri~"scripts/modal/jquery.modal.min.js"|fversion }}"></script>
+    <script src="{{ base_uri~"scripts/padamini.js"|fversion }}"></script>
+    <script src="{{ base_uri~"scripts/main.js"|fversion }}"></script>
+  </head>
 
 {% block body %}
   <body>

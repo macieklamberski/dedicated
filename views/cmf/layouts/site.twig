@@ -1,12 +1,21 @@
-{% extends "layouts/application.twig" %}
-
-{% block title %}{% block subtitle %}{% endblock %} | {{ settings.site_title }}{% endblock %}
-
-{% block head %}
-  {% if settings.site_keywords|length %}
-    <meta name="keywords" content="{{ settings.site_keywords }}">
-  {% endif %}
-  {% if settings.site_description|length %}
-    <meta name="description" content="{{ settings.site_description }}">
-  {% endif %}
-{% endblock %}
+<!DOCTYPE html>
+<!--[if IE 7]>         <html lang="{{ lang.code|default("en") }}" class="no-js ie7"> <![endif]-->
+<!--[if IE 8]>         <html lang="{{ lang.code|default("en") }}" class="no-js ie8"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="{{ lang.code|default("en") }}" class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    {% block head %}
+      {% if settings.site_keywords|length %}
+        <meta name="keywords" content="{{ settings.site_keywords }}">
+      {% endif %}
+      {% if settings.site_description|length %}
+        <meta name="description" content="{{ settings.site_description }}">
+      {% endif %}
+    {% endblock %}
+  </head>
+  {% block body %}{% endblock %}
+</html>
