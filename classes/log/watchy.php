@@ -4,12 +4,18 @@ class Log_Watchy extends Kohana_Log_Watchy {
 
 	public function write(array $messages)
 	{
+		$this->email_content = '<h2>'.$messages[0]['body'].'</h2>';
+
+		unset($messages[0]);
+
 		$messages['server'] = $_SERVER;
 		$messages['post']   = $_POST;
 		$messages['get']    = $_GET;
 
-		foreach ($messages as $message)
+		foreach ($messages as $name => $message)
 		{
+			$this->email_content .= '<hr>';
+			$this->email_content .= '<h3>$_'.strtoupper($name).'</h3>';
 			$this->email_content .= '<dl>';
 
 			foreach ($message as $title => $value)
