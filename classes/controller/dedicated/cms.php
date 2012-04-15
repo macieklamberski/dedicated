@@ -5,7 +5,7 @@ class Controller_Dedicated_CMS extends Controller_Application {
 	public function before()
 	{
 		// Make sure that the user is logged in
-		if ($this->request->route() != Route::get('cms-session-login') && ! Auth::instance()->logged_in())
+		if ($this->request->route() != Route::get('cms-session-login') && ! Auth::instance()->logged_in('admin'))
 		{
 			$this->request->redirect(Route::get('cms-session-login')->uri());
 		}

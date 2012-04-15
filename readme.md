@@ -11,6 +11,7 @@ Dedicated uses [Padamini](http://github.com/lamberski/padamini/) as user interfa
 Dedicated uses few external Kohana modules which are required to run everything smoothly:
 
 * [Jelly](http://github.com/creatoro/jelly) - ORM layer,
+* [Jelly Auth](http://github.com/creatoro/jelly-auth) - auth driver for Jelly ORM,
 * [Pudding](http://github.com/lamberski/pudding) - extension to Jelly ORM,
 * [Database](http://github.com/kohana/database) - official database layer,
 * [Pagination](http://github.com/kohana/pagination) - official pagination module,

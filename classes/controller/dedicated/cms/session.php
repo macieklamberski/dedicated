@@ -4,17 +4,19 @@ class Controller_Dedicated_CMS_Session extends Controller_CMS {
 
 	public function action_login()
 	{
-		if (Auth::instance()->logged_in())
+		if (Auth::instance()->logged_in('admin'))
 		{
+			Auth::instance()->logout();
+
 			$this->request->redirect(Route::get('cms-index')->uri());
 		}
 
 		$this->template
 			->bind('form', $_POST);
-
+/* echo Auth::instance()->hash('haslo2'); */
 		if ($this->request->method() == Request::POST)
 		{
-			if (Auth::instance()->login('admin', Arr::get($_POST, 'password')))
+			if (Auth::instance()->login(Arr::get($_POST, 'username'), Arr::get($_POST, 'password')))
 			{
 				Hint::set('info', __('cms.welcome'), array(':project_name' => Settings::get('project_name')));
 

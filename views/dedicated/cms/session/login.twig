@@ -20,6 +20,10 @@
       {% form.open current_uri, {"class":"form"} %}
         <fieldset class="fields fields-plain">
           <div class="field">
+            {% form.label "form-username", "Login"|trans, {"class":"label"} %}
+            {% form.input "username", null, {"id":"form-username", "class":"medium"} %}
+          </div>
+          <div class="field">
             {% form.label "form-password", "Hasło"|trans, {"class":"label"} %}
             {% form.password "password", null, {"id":"form-password", "class":"medium"} %}
           </div>
