@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_CMF_CMS_Translations extends Controller_CMS {
+class Controller_Dedicated_CMS_Translations extends Controller_CMS {
 
 	public function action_index()
 	{

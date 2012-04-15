@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class CMF_I18n extends Kohana_I18n {
+class Dedicated_I18n extends Kohana_I18n {
 
 	protected static $_translations;
 	protected static $_loaded;

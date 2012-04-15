@@ -2,7 +2,7 @@
 
 //-- CMS -----------------------------------------------------------------------
 
-if (Kohana::$config->load('cmf.modules.cms'))
+if (Kohana::$config->load('dedicated.modules.cms'))
 {
 	// Index
 	Route::set('cms-index', 'cms')

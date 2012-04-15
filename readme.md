@@ -1,14 +1,14 @@
-# CMF
+# Dedicated
 
-CMF (Content Management Framework) is a set of base funcionality for creating customized content management system using Kohana Framework.
+Dedicated is an CMF (Content Management Framework) containing base funcionality for creating customized content management system using Kohana Framework.
 
 ## Vendors
 
-CMF uses [Padamini](http://github.com/lamberski/padamini/) as user interface layer.
+Dedicated uses [Padamini](http://github.com/lamberski/padamini/) as user interface layer.
 
 ## Requirements
 
-CMF uses few external Kohana modules which are required to run everything smoothly:
+Dedicated uses few external Kohana modules which are required to run everything smoothly:
 
 * [Jelly](http://github.com/creatoro/jelly) - ORM layer,
 * [Pudding](http://github.com/lamberski/pudding) - extension to Jelly ORM,

@@ -1,3 +1,3 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-abstract class Model_Timestampable extends Model_CMF_Timestampable {}
+abstract class Model_Timestampable extends Model_Dedicated_Timestampable {}

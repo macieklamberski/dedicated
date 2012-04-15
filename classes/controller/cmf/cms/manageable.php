@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-abstract class Controller_CMF_CMS_Manageable extends Controller_CMS {
+abstract class Controller_Dedicated_CMS_Manageable extends Controller_CMS {
 
 	protected static $_options;
 

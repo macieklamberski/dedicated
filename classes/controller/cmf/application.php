@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_CMF_Application extends Controller_Template_Twig {
+class Controller_Dedicated_Application extends Controller_Template_Twig {
 
 	public function before()
 	{
@@ -36,14 +36,14 @@ class Controller_CMF_Application extends Controller_Template_Twig {
 			break;
 		}
 
-		if (Kohana::$config->load('cmf.modules.settings'))
+		if (Kohana::$config->load('dedicated.modules.settings'))
 		{
 			$settings = Settings::get();
 
 			I18n::lang(Settings::get($this->request->directory().'_default_lang'));
 		}
 
-		if (Kohana::$config->load('cmf.modules.multilanguage'))
+		if (Kohana::$config->load('dedicated.modules.multilanguage'))
 		{
 			$langs = Jelly::query('lang')->select();
 

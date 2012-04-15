@@ -1,12 +1,12 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_CMF_Site extends Controller_Application {
+class Controller_Dedicated_Site extends Controller_Application {
 
 	public function before()
 	{
 		parent::before();
 
-		if (Kohana::$config->load('cmf.modules.i18n'))
+		if (Kohana::$config->load('dedicated.modules.i18n'))
 		{
 			I18n::source('db');
 		}

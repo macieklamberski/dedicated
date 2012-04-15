@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_CMF_CMS extends Controller_Application {
+class Controller_Dedicated_CMS extends Controller_Application {
 
 	public function before()
 	{
