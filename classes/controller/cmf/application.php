@@ -40,7 +40,7 @@ class Controller_CMF_Application extends Controller_Template_Twig {
 		{
 			$settings = Settings::get();
 
-			I18n::lang(Settings::get($this->request->directory().'_default_lang');
+			I18n::lang(Settings::get($this->request->directory().'_default_lang'));
 		}
 
 		if (Kohana::$config->load('cmf')->modules->multilanguage)
