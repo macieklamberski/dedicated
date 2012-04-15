@@ -9,17 +9,6 @@ class Controller_CMF_Admin_Settings extends Controller_Admin {
 
 		if ($this->request->method() == Request::POST)
 		{
-			// Setting new password to panel
-			if ( ! empty($_POST['admin_password']))
-			{
-				Jelly::query('setting')
-					->by_key('admin_password')
-					->set(array('value' => Auth::instance()->hash_password($_POST['admin_password'])))
-					->update();
-			}
-
-			unset($_POST['admin_password']);
-
 			// Updating values of all other defined settings
 			foreach ($_POST as $key => $value)
 			{
