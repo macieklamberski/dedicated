@@ -1,16 +1,19 @@
-# Kohana CMF
+# CMF
 
-Kohana CMF (Content Management Framework) is a set of base funcionality for creating customized CMS.
+CMF (Content Management Framework) is a set of base funcionality for creating customized content management system using Kohana Framework.
 
 ## Vendors
 
-Kohana CMF uses [Padamini](http://github.com/lamberski/padamini/) as user interface layer.
+CMF uses [Padamini](http://github.com/lamberski/padamini/) as user interface layer.
 
 ## Requirements
 
-Kohana CMF uses few external Kohana modules which are required to run everything smoothly:
+CMF uses few external Kohana modules which are required to run everything smoothly:
 
 * [Jelly](http://github.com/creatoro/jelly) - ORM layer,
+* [Pudding](http://github.com/lamberski/pudding) - extension to Jelly ORM,
 * [Database](http://github.com/kohana/database) - official database layer,
+* [Pagination](http://github.com/kohana/pagination) - official pagination module,
 * [Auth](http://github.com/kohana/auth) - official auth layer,
-* [Hint](https://github.com/goyote/hint) - flash messages.
+* [Twig](http://github.com/icyleaf/twig) - module for integrating Twig template system,
+* [Hint](http://github.com/goyote/hint) - flash messages.
