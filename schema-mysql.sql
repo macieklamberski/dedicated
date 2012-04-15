@@ -36,7 +36,7 @@ VALUES
   ('site_title',         'Project name', 1),
   ('site_description',   '',             1),
   ('site_keywords',      '',             1),
-  ('admin_default_lang', 'pl',           1);
+  ('cms_default_lang',   'pl',           1);
 
 
 # Dump of table translations

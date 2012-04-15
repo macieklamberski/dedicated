@@ -8,8 +8,8 @@ return array(
 		'view' => 'pagination/site',
 		'items_per_page' => 10,
 	),
-	'admin' => array(
-		'view' => 'pagination/admin',
+	'cms' => array(
+		'view' => 'pagination/cms',
 		'items_per_page' => max(15, Session::instance()->get('per_page')),
 	),
 );

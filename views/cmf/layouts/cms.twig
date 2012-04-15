@@ -1,0 +1,96 @@
+{% import "helpers/cms.twig" as h %}
+<!DOCTYPE html>
+<!--[if IE 8]>         <html lang="{{ lang.code|default("en") }}" class="no-js ie8"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="{{ lang.code|default("en") }}" class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% block subtitle %}{% endblock %} | {{ settings.project_name }} CMS{% endblock %}</title>
+    <link href="styles/padamini.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+    <script src="{{ base_uri~"scripts/modal/jquery.modal.min.js"|fversion }}"></script>
+    <script src="{{ base_uri~"scripts/padamini.js"|fversion }}"></script>
+    <script src="{{ base_uri~"scripts/main.js"|fversion }}"></script>
+  </head>
+
+{% block body %}
+  <body>
+    {% block header %}
+      <header role="banner">
+        <div class="wrapper top clearfix">
+          <div class="title">
+            <h3><a href="{% url "cms-index", {} %}" class="to-index left"><em>{{ settings.project_name }}</em> CMF</a></h3>
+            <a href="{% url "site-index", {} %}" class="title-action left" rel="external">{{ "Odwiedź stronę"|trans }}</a>
+          </div>
+
+          <div class="user-panel">
+            {% if current_user.loaded %}
+              <p>{{ "Zalogowany jako"|trans }} <em>{{ current_user.name|default(current_user.username) }}</em></p>
+            {% endif %}
+            <a href="{% url "cms-session-logout", {} %}" class="title-action left">{{ "Wyloguj"|trans }}</a>
+          </div>
+        </div>
+
+        <nav role="navigation">
+          <h4 class="outline">{{ "Główna nawigacja"|trans }}</h4>
+          <ul class="wrapper tabs clearfix">
+            {% block navigation %}
+              <li {{ h.selected_if(request, ["settings"]) }}>
+                <a href="{% url "cms-settings-index", {} %}">{{ "Ustawienia"|trans }}</a>
+              </li>
+              <li {{ h.selected_if(request, ["translations"]) }}>
+                <a href="{% url "cms-translations-index", {} %}">{{ "Tłumaczenia"|trans }}</a>
+              </li>
+              <li {{ h.selected_if(request, ["backups"]) }}>
+                <a href="{% url "cms-backups", {} %}">{{ "Eksport danych"|trans }}</a>
+              </li>
+            {% endblock %}
+          </ul>
+        </nav>
+
+        <div class="subnavigation">
+          <ul class="wrapper clearfix">
+            {% block subnavigation %}
+              <li><a href="#">Management</a></li>
+              <li class="selected"><a href="#">Categories</a></li>
+              <li><a href="#">Parameters</a></li>
+              <li><a href="#">Stats</a></li>
+              <li><a href="#">Payments</a></li>
+            {% endblock %}
+          </ul>
+        </div>
+      </header>
+    {% endblock %}
+
+    <section role="main" id="main" class="wrapper clearfix">
+      {{ flashes|raw }}
+
+      {% if errors|length %}
+        <div class="message message-error">
+          <p>{{ "Przy wysyłaniu formularza wystąpiły poniższe błędy"|trans }}:</p>
+          <ul>
+            {% for error in errors %}
+              {% if error|length %}
+                <li>{{ error|raw }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      {% block main %}{% endblock %}
+
+      {% if pagination %}
+        {{ pagination|raw }}
+      {% endif %}
+    </section>
+
+    <footer class="wrapper clearfix" role="contentinfo">
+      <p>{{ "Interfejs napędzany przez"|trans }} <a href="http://github.com/lamberski/padamini">Padamini</a>.</p>
+    </footer>
+  </body>
+{% endblock %}

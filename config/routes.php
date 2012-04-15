@@ -1,52 +1,52 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-//-- Admin ---------------------------------------------------------------------
+//-- CMS -----------------------------------------------------------------------
 
 if (Kohana::$config->load('cmf.modules.cms'))
 {
 	// Index
-	Route::set('admin-index', 'cms')
+	Route::set('cms-index', 'cms')
 		->defaults(array(
-			'directory'  => 'admin',
+			'directory'  => 'cms',
 			'controller' => 'index',
 		));
 
 	// Backups
-	Route::set('admin-backups-index', 'cms/backups(/<action>)', array(
+	Route::set('cms-backups-index', 'cms/backups(/<action>)', array(
 			'action' => 'database|files',
 		))
 		->defaults(array(
-			'directory'  => 'admin',
+			'directory'  => 'cms',
 			'controller' => 'backups',
 		));
 
 	// Login
-	Route::set('admin-session-login', 'cms/login')
+	Route::set('cms-session-login', 'cms/login')
 		->defaults(array(
-			'directory'  => 'admin',
+			'directory'  => 'cms',
 			'controller' => 'session',
 			'action'     => 'login',
 		));
 
 	// Logout
-	Route::set('admin-session-logout', 'cms/logout')
+	Route::set('cms-session-logout', 'cms/logout')
 		->defaults(array(
-			'directory'  => 'admin',
+			'directory'  => 'cms',
 			'controller' => 'session',
 			'action'     => 'logout',
 		));
 
 	// Settings
-	Route::set('admin-settings-index', 'cms/settings')
+	Route::set('cms-settings-index', 'cms/settings')
 		->defaults(array(
-			'directory'  => 'admin',
+			'directory'  => 'cms',
 			'controller' => 'settings',
 		));
 
 	// Translations
-	Route::set('admin-translations-index', 'cms/translations')
+	Route::set('cms-translations-index', 'cms/translations')
 		->defaults(array(
-			'directory'  => 'admin',
+			'directory'  => 'cms',
 			'controller' => 'translations',
 		));
 }
