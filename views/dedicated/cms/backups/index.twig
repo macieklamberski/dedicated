@@ -23,7 +23,7 @@
           {% if environment in ["development", "testing"] %}
             <span class="button button-disabled left">{{ "Pobierz archiwum ZIP z danymi tabel"|trans }}</span>
           {% else %}
-            <a href="{% url "cms-backups", {"action":"database"} %}" class="button left">{{ "Pobierz archiwum ZIP z danymi tabel"|trans }}</a>
+            <a href="{% url "cms-backups-index", {"action":"database"} %}" class="button left">{{ "Pobierz archiwum ZIP z danymi tabel"|trans }}</a>
           {% endif %}
         </div>
 

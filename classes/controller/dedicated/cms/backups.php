@@ -34,7 +34,7 @@ class Controller_Dedicated_CMS_Backups extends Controller_CMS {
 		// Disable creating backups on testing environment
 		if (Kohana::$environment == Kohana::TESTING)
 		{
-			$this->request->redirect(Route::get('cms-backups')->uri());
+			$this->request->redirect(Route::get('cms-backups-index')->uri());
 		}
 
 		$tables = DB::query(Database::SELECT, 'SHOW TABLES')->execute()->as_array();
