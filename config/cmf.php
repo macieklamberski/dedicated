@@ -2,8 +2,9 @@
 
 return array(
 	'modules' => array(
+		'cms'           => TRUE,
 		'multilanguage' => TRUE,
-		'i18n' => TRUE,
-		'settings' => TRUE,
+		'i18n'          => TRUE,
+		'settings'      => TRUE,
 	),
 );
