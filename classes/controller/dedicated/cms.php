@@ -27,6 +27,7 @@ class Controller_Dedicated_CMS extends Controller_Application {
 		parent::before();
 
 		$this->template
+			->set('current_user', Auth::instance()->get_user())
 			->set('affected_ids', Session::instance()->get('affected_ids'));
 	}
 

@@ -1,7 +1,7 @@
 {% macro selected_if(request, controllers, actions) %}
   {% if controllers|length == 0 or request.controller in controllers %}
     {% if actions|length == 0 or request.action in actions %}
-      class="selected"
+      selected
     {% endif %}
   {% endif %}
 {% endmacro %}
