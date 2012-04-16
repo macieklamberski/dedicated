@@ -4,6 +4,13 @@
 
 if (Kohana::$config->load('dedicated.modules.cms'))
 {
+	// Static file serving (CSS, JS, images)
+	Route::set('cms-media-index', 'padamini(/<file>)', array('file' => '.+'))
+		->defaults(array(
+			'directory'  => 'cms',
+			'controller' => 'media',
+		));
+
 	// Index
 	Route::set('cms-index', 'cms')
 		->defaults(array(

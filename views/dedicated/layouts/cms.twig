@@ -5,16 +5,16 @@
   <head>
     <meta charset="utf-8">
     <title>{% block title %}{% block subtitle %}{% endblock %} | {{ settings.project_name }} CMS{% endblock %}</title>
-    <link href="styles/padamini.css" rel="stylesheet">
+    <link href="{{ base_uri~"padamini/styles/padamini.css"|fversion }}" rel="stylesheet">
     <!--[if lt IE 9]>
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
-    <script src="{{ base_uri~"scripts/modal/jquery.modal.min.js"|fversion }}"></script>
-    <script src="{{ base_uri~"scripts/padamini.js"|fversion }}"></script>
-    <script src="{{ base_uri~"scripts/main.js"|fversion }}"></script>
+    <script src="{{ base_uri~"padamini/scripts/modal/jquery.modal.min.js"|fversion }}"></script>
+    <script src="{{ base_uri~"padamini/scripts/padamini.js"|fversion }}"></script>
+    <script src="{{ base_uri~"padamini/scripts/main.js"|fversion }}"></script>
   </head>
 
 {% block body %}
