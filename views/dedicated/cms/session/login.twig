@@ -1,6 +1,6 @@
 {% extends "layouts/cms.twig" %}
 
-{% block subtitle "Logowanie"|trans %}
+{% block subtitle "Logowanie" %}
 
 {% block body %}
   <section id="content" class="wrapper wrapper-login" role="main">
@@ -10,9 +10,11 @@
 
     <hr>
 
+    {{ flashes|raw }}
+
     {% if request.method == "POST" %}
       <div class="message message-error message-centered">
-        <p>{{ "Podane hasło jest błędne."|trans }}</p>
+        <p>Podane hasło jest błędne."</p>
       </div>
     {% endif %}
 
@@ -20,25 +22,27 @@
 
       <fieldset class="fields fields-plain">
         <div class="field">
-          {% form.label "form-username", "Login"|trans, {"class":"label"} %}
+          {% form.label "form-username", "Login", {"class":"label"} %}
           {% form.input "username", request.post("username"), {"id":"form-username", "class":"medium"} %}
         </div>
         <div class="field">
-          {% form.label "form-password", "Hasło"|trans, {"class":"label"} %}
+          {% form.label "form-password", "Hasło", {"class":"label"} %}
           {% form.password "password", request.post("password"), {"id":"form-password", "class":"medium"} %}
-          <p class="hint block"><a href="#">{{ "Nie pamiętasz hasła?"|trans }}</a></p>
+          <p class="hint block"><a href="{% url "cms-password-forgot", {} %}">Nie pamiętasz hasła?</a></p>
         </div>
         <div class="field field-plain">
           <label for="form-remember">
             {% form.checkbox "remember", 1, request.post("remember"), {"id":"form-remember"} %}
-            {{ "Zapamiętaj mnie"|trans }}
+            Zapamiętaj mnie
           </label>
         </div>
       </fieldset>
 
       <fieldset class="buttons">
-        <p class="left"><a href="{% url "site-index", {} %}">&larr; {{ "Powróć na stronę"|trans }}</a> {{ "jeśli trafiłeś tu przez przypadek"|trans }}.</p>
-        <button class="button button-positive button-main right">{{ "Zaloguj"|trans }}</button>
+        <p class="right">
+          <a href="{% url "site-index", {} %}">&larr; Wróć na stronę</a> jeśli trafiłeś tu przez przypadek
+        </p>
+        <button class="button button-positive button-main left">Zaloguj</button>
       </fieldset>
     {% form.close {} %}
   </section>

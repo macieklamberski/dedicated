@@ -21,8 +21,8 @@
     <body>
       <nav class="hidden">
         <ol>
-          <li><a href="#navigation">{{ "Skocz do nawigacji"|trans }}</a></li>
-          <li><a href="#content">{{ "Skocz do treści"|trans }}</a></li>
+          <li><a href="#navigation">Skocz do nawigacji</a></li>
+          <li><a href="#content">Skocz do treści</a></li>
         </ol>
       </nav>
 
@@ -42,8 +42,8 @@
 
           <div class="user-panel">
             {% if current_user.loaded %}
-              <p>{{ "Zalogowany jako"|trans }} <em>{{ current_user.name|default(current_user.username) }}</em></p>
-              <a href="{% url "cms-session-logout", {} %}" class="action ">{{ "Wyloguj"|trans }}</a>
+              <p>Zalogowany jako <em>{{ current_user.name|default(current_user.username) }}</em></p>
+              <a href="{% url "cms-session-logout", {} %}" class="action">Wyloguj</a>
             {% endif %}
           </div>
         </div>
@@ -52,17 +52,17 @@
       <hr>
 
       <nav id="navigation" role="navigation">
-        <h4 class="hidden">{{ "Główna nawigacja"|trans }}</h4>
+        <h4 class="hidden">Główna nawigacja</h4>
         <ul class="wrapper cf">
           {% block navigation %}
             <li class="tab {{ h.selected_if(request, ["settings"]) }}">
-              <a href="{% url "cms-settings-index", {} %}">{{ "Ustawienia"|trans }}</a>
+              <a href="{% url "cms-settings-index", {} %}">Ustawienia</a>
             </li>
             <li class="tab {{ h.selected_if(request, ["translations"]) }}">
-              <a href="{% url "cms-translations-index", {} %}">{{ "Tłumaczenia"|trans }}</a>
+              <a href="{% url "cms-translations-index", {} %}">Tłumaczenia</a>
             </li>
             <li class="tab {{ h.selected_if(request, ["backups"]) }}">
-              <a href="{% url "cms-backups-index", {} %}">{{ "Eksport danych"|trans }}</a>
+              <a href="{% url "cms-backups-index", {} %}">Eksport danych</a>
             </li>
           {% endblock %}
         </ul>
@@ -79,7 +79,7 @@
       <div id="content" role="main" class="wrapper">
         <noscript>
           <div class="message message-warning message-centered">
-            <p>{{ "Obsługa języka JavaScript jest wyłączona. Panel może nie działać w pełni poprawnie."|trans }}</p>
+            <p>Obsługa języka JavaScript jest wyłączona. Panel może nie działać w pełni poprawnie.</p>
           </div>
         </noscript>
 
@@ -87,11 +87,27 @@
 
         {% if errors|length %}
           <div class="message message-error">
-            <p>{{ "Przy wysyłaniu formularza wystąpiły poniższe błędy"|trans }}:</p>
+            <p>Przy wysyłaniu formularza wystąpiły poniższe błędy:</p>
             <ul>
-              {% for error in errors %}
+              {% for key, error in errors %}
                 {% if error|length %}
-                  <li>{{ error|raw }}</li>
+
+                  {% if key == "_external" %}
+
+                    {% for key, error in error %}
+                      {% if error|length %}
+                        <li><label for="form-{{ key|replace("_", "-") }}">{{ error|raw }}</label></li>
+                      {% endif %}
+                    {% endfor %}
+
+                  {% else %}
+
+                    {% if error|length %}
+                      <li><label for="form-{{ key|replace("_", "-") }}">{{ error|raw }}</label></li>
+                    {% endif %}
+
+                  {% endif %}
+
                 {% endif %}
               {% endfor %}
             </ul>
@@ -108,7 +124,7 @@
       <hr>
 
       <footer id="footer" role="contentinfo" class="wrapper">
-        <p>{{ "Interfejs napędzany przez"|trans }} <a href="http://github.com/lamberski/padamini">Padamini</a>.</p>
+        <p class="right">Interfejs napędzany przez <a href="http://github.com/lamberski/padamini" data-behavior="new-tab">Padamini</a>.</p>
       </footer>
     </body>
   {% endblock %}

@@ -6,14 +6,9 @@ class Controller_Dedicated_CMS_Session extends Controller_CMS {
 	{
 		if (Auth::instance()->logged_in('admin'))
 		{
-			Auth::instance()->logout();
-
 			$this->request->redirect(Route::get('cms-index')->uri());
 		}
 
-		$this->template
-			->bind('form', $_POST);
-/* echo Auth::instance()->hash('haslo2'); */
 		if ($this->request->method() == Request::POST)
 		{
 			if (Auth::instance()->login(Arr::get($_POST, 'username'), Arr::get($_POST, 'password')))
@@ -27,7 +22,7 @@ class Controller_Dedicated_CMS_Session extends Controller_CMS {
 
 	public function action_logout()
 	{
-		if (Auth::instance()->logged_in())
+		if (Auth::instance()->logged_in('admin'))
 		{
 			Auth::instance()->logout();
 		}

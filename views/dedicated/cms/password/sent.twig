@@ -1,0 +1,25 @@
+{% extends "layouts/cms.twig" %}
+
+{% block subtitle "Zmiana hasła" %}
+
+{% block body %}
+  <section id="content" class="wrapper wrapper-login" role="main">
+    <header class="header header-page cf">
+      <h1 class="heading heading-page">Zmiana hasła</h1>
+    </header>
+
+    <hr>
+
+    <div class="message message-success">
+      <p>Na adres skojarzony z podanym użytkownikiem został wysłany link do zmiany hasła.</p>
+    </div>
+
+    <div class="form">
+      <div class="buttons">
+        <p class="right">
+          <a href="{% url "cms-session-login", {} %}">&larr; Powróć na stronę logowania</a>
+        </p>
+      </div>
+    </div>
+  </section>
+{% endblock %}

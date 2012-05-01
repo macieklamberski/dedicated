@@ -1,0 +1,16 @@
+Witaj, {{ user.username }}!
+
+Poniżej znajduje się link do strony z formularzem do zmiany hasła do panelu administracyjnego strony {{ settings.project_name }}:
+
+{{ base_url~"/"~link }}
+
+Link jest ważny dwie godziny. Po tym czasie należy wygenerować nowy link z formularza na stronie:
+
+{{ base_url }}{% url "cms-password-forgot", {} %}
+
+
+Jeśli to nie ty zarządałeś zmiany hasła, zignoruj tę wiadomość. Hasło dostępowe do panelu pozostanie niezmienione.
+
+
+--
+Ta wiadomość została wysłana automatycznie z systemu CMS strony {{ settings.project_name }}.

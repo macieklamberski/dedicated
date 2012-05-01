@@ -27,6 +27,32 @@ if (Kohana::$config->load('dedicated.modules.cms'))
 			'controller' => 'backups',
 		));
 
+	// Forgot Password
+	Route::set('cms-password-forgot', 'cms/password/forgot')
+		->defaults(array(
+			'directory'  => 'cms',
+			'controller' => 'password',
+			'action'     => 'forgot',
+		));
+
+	// Change Password Link Sent
+	Route::set('cms-password-sent', 'cms/password/sent')
+		->defaults(array(
+			'directory'  => 'cms',
+			'controller' => 'password',
+			'action'     => 'sent',
+		));
+
+	// Change Forgot Password
+	Route::set('cms-password-change', 'cms/password/change/<hash>', array(
+			'hash' => '[a-zA-Z0-9]+',
+		))
+		->defaults(array(
+			'directory'  => 'cms',
+			'controller' => 'password',
+			'action'     => 'change',
+		));
+
 	// Login
 	Route::set('cms-session-login', 'cms/login')
 		->defaults(array(

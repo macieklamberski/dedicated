@@ -1,31 +1,36 @@
 {% extends "layouts/cms.twig" %}
-	
 
-{% block subtitle "Tłumaczenia"|trans %}
+{% block subtitle "Tłumaczenia" %}
 
 {% block main %}
-  <header class="header header-page clearfix">
+  <header class="header header-page cf">
     <h1 class="heading heading-page">{{ block("subtitle") }}</h1>
   </header>
 
-  {% form.open current_uri, {"class":"form"} %}
-    <fieldset class="fields fields-plain">
-      {{ h.lang_tabs(langs) }}
+  {% if translations|length > 0 %}
+    {% form.open current_uri, {"class":"form"} %}
+      <fieldset class="fields fields-plain">
+        {{ h.lang_tabs(langs) }}
 
-      {% for key, langs in translations %}
-        <div class="field">
-          {% for translation in langs %}
-            {% if loop.first %}
-              {% form.label "form-"~key|urltitle, translation.key|replace(" ", "&nbsp;"), {"class":"label", "title":translation.key} %}
-            {% endif %}
-            {% form.input key~"["~translation.lang.code~"]", translation.value, {"class":"big", "id":"form-"~key|urltitle} %}
-          {% endfor %}
-        </div>
-      {% endfor %}
-    </fieldset>
+        {% for key, langs in translations %}
+          <div class="field">
+            {% for translation in langs %}
+              {% if loop.first %}
+                {% form.label "form-"~key|urltitle, translation.key|replace(" ", "&nbsp;"), {"class":"label", "title":translation.key} %}
+              {% endif %}
+              {% form.input key~"["~translation.lang.code~"]", translation.value, {"class":"big", "id":"form-"~key|urltitle} %}
+            {% endfor %}
+          </div>
+        {% endfor %}
+      </fieldset>
 
-    <fieldset class="buttons">
-      <button class="button button-positive button-main right">{{ "Zapisz zmiany"|trans }}</button>
-    </fieldset>
-  {% form.close 0 %}
+      <fieldset class="buttons">
+        <button class="button button-positive button-main left">Zapisz zmiany</button>
+      </fieldset>
+    {% form.close 0 %}
+  {% else %}
+    <div class="message message-info message-centered">
+      <p>Nie ma jeszcze żadnych tekstów do tłumaczenia.</p>
+    </div>
+  {% endif %}
 {% endblock %}

@@ -5,9 +5,10 @@ class Controller_Dedicated_CMS extends Controller_Application {
 	public function before()
 	{
 		// Make sure that the user is logged in
-		if ($this->request->route() != Route::get('cms-session-login') && ! Auth::instance()->logged_in('admin'))
+		if ( ! Auth::instance()->logged_in('admin'))
 		{
-			$this->request->redirect(Route::get('cms-session-login')->uri());
+			if ($this->request->route() != Route::get('cms-session-login') && $this->request->route() != Route::get('cms-password-forgot') && $this->request->route() != Route::get('cms-password-sent') && $this->request->route() != Route::get('cms-password-change'))
+				$this->request->redirect(Route::get('cms-session-login')->uri());
 		}
 
 		// Remember last visited page

@@ -1,10 +1,9 @@
 {% extends "layouts/cms.twig" %}
-	
 
-{% block subtitle "Eksport danych"|trans %}
+{% block subtitle "Eksport danych" %}
 
 {% block main %}
-  <header class="header header-page clearfix">
+  <header class="header header-page cf">
     <h1 class="heading heading-page">{{ block("subtitle") }}</h1>
   </header>
 
@@ -17,13 +16,13 @@
   {% form.open current_uri, {"class":"form"} %}
     <fieldset class="fields fields-plain">
       <div class="field">
-        {% form.label null, "Baza danych"|trans, {"class":"label"} %}
+        {% form.label null, "Baza danych", {"class":"label"} %}
 
-        <div class="clearfix">
+        <div class="cf">
           {% if environment in ["development", "testing"] %}
-            <span class="button button-disabled left">{{ "Pobierz archiwum ZIP z danymi tabel"|trans }}</span>
+            <span class="button button-disabled left">Pobierz archiwum ZIP z danymi tabel</span>
           {% else %}
-            <a href="{% url "cms-backups-index", {"action":"database"} %}" class="button left">{{ "Pobierz archiwum ZIP z danymi tabel"|trans }}</a>
+            <a href="{% url "cms-backups-index", {"action":"database"} %}" class="button left">Pobierz archiwum ZIP z danymi tabel</a>
           {% endif %}
         </div>
 
@@ -31,13 +30,13 @@
       </div>
 
       <div class="field">
-        {% form.label null, "Pliki"|trans, {"class":"label"} %}
+        {% form.label null, "Pliki", {"class":"label"} %}
 
-        <div class="clearfix">
+        <div class="cf">
           {% if environment in ["development", "testing"] %}
-            <span class="button button-disabled left">{{ "Pobierz archiwum ZIP z plikami witryny"|trans }}</span>
+            <span class="button button-disabled left">Pobierz archiwum ZIP z plikami witryny</span>
           {% else %}
-            <a href="{% url "cms-backups", {"action":"files"} %}" class="button left">{{ "Pobierz archiwum ZIP z plikami witryny"|trans }}</a>
+            <a href="{% url "cms-backups", {"action":"files"} %}" class="button left">Pobierz archiwum ZIP z plikami witryny</a>
           {% endif %}
         </div>
 

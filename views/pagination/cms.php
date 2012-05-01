@@ -1,5 +1,5 @@
 <?php if ($page->total_items): ?>
-  <nav class="pagination clearfix">
+  <nav class="pagination cf">
     <h2 class="outline"><?php echo __("Stronicowanie") ?></h2>
     <p>
       <?php echo __('Wyświetlane') ?> <em><?php echo $page->offset + 1 ?>-<?php echo min($page->total_items, $page->offset + $page->items_per_page) ?></em> <?php echo __('z') ?> <em><?php echo $page->total_items ?></em> <?php echo __('rekordów') ?>.

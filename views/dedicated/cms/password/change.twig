@@ -1,0 +1,82 @@
+{% extends "layouts/cms.twig" %}
+
+{% block subtitle "Zmiana hasła" %}
+
+{% block body %}
+  <section id="content" class="wrapper wrapper-login" role="main">
+    <header class="header header-page cf">
+      <h1 class="heading heading-page">Zmiana hasła</h1>
+    </header>
+
+    <hr>
+
+    {{ flashes|raw }}
+
+    {% if errors|length %}
+      <div class="message message-error">
+        <p>Przy wysyłaniu formularza wystąpiły poniższe błędy:</p>
+        <ul>
+          {% for key, error in errors %}
+            {% if error|length %}
+
+              {% if key == "_external" %}
+
+                {% for key, error in error %}
+                  {% if error|length %}
+                    <li><label for="form-{{ key|replace("_", "-") }}">{{ error|raw }}</label></li>
+                  {% endif %}
+                {% endfor %}
+
+              {% else %}
+
+                {% if error|length %}
+                  <li><label for="form-{{ key|replace("_", "-") }}">{{ error|raw }}</label></li>
+                {% endif %}
+
+              {% endif %}
+
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    {% form.open current_uri, {"class":"form", "novalidate":"novalidate"} %}
+
+      {% if not forgot.expired and user.loaded %}
+
+        <fieldset class="fields fields-plain">
+          <div class="field">
+            {% form.label "form-password", "Hasło", {"class":"label"} %}
+            {% form.password "password", "", {"id":"form-password", "class":"medium"} %}
+          </div>
+          <div class="field">
+            {% form.label "form-password-confirm", "Powtórz", {"class":"label"} %}
+            {% form.password "password_confirm", "", {"id":"form-password-confirm", "class":"medium"} %}
+          </div>
+        </fieldset>
+
+        <fieldset class="buttons">
+          <p class="right">
+            <a href="{% url "cms-session-login", {} %}">&larr; Powróć na stronę logowania</a>
+          </p>
+          <button class="button button-positive button-main left">Zmień hasło</button>
+        </fieldset>
+
+      {% else %}
+
+        <div class="message message-error message-centered">
+          <p>Link wygasł lub nie istnieje.</p>
+        </div>
+
+        <fieldset class="buttons">
+          <p class="right">
+            <a href="{% url "cms-session-login", {} %}">&larr; Powróć na stronę logowania</a>
+          </p>
+        </fieldset>
+
+      {% endif %}
+
+    {% form.close {} %}
+  </section>
+{% endblock %}

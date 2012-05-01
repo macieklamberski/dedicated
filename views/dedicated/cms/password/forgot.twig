@@ -1,0 +1,52 @@
+{% extends "layouts/cms.twig" %}
+
+{% block subtitle "Zmiana hasła" %}
+
+{% block body %}
+  <section id="content" class="wrapper wrapper-login" role="main">
+    <header class="header header-page cf">
+      <h1 class="heading heading-page">Zmiana hasła</h1>
+    </header>
+
+    <hr>
+
+    {{ flashes|raw }}
+    
+    {% if errors|length %}
+      <div class="message message-error">
+        <p>Przy wysyłaniu formularza wystąpiły poniższe błędy:</p>
+        <ul>
+          {% for error in errors %}
+            {% if error|length %}
+              <li>{{ error|raw }}</li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+
+    {% if request.method == "POST" %}
+      <div class="message message-error message-centered">
+        <p>Nie znaleziono użytkownika o podanej nazwie.</p>
+      </div>
+    {% endif %}
+
+    {% form.open current_uri, {"class":"form", "novalidate":"novalidate"} %}
+
+      <fieldset class="fields fields-plain">
+        <div class="field">
+          {% form.label "form-username", "Login"|trans, {"class":"label"} %}
+          {% form.input "username", request.post("username"), {"id":"form-username", "class":"medium"} %}
+          <p class="hint block">Na adres e-mail powiązany z podanym użytkownikiem zostanie wysłany link do zmiany hasła.</p>
+        </div>
+      </fieldset>
+
+      <fieldset class="buttons">
+        <p class="right">
+          <a href="{% url "cms-session-login", {} %}">&larr; Powróć na stronę logowania</a>
+        </p>
+        <button class="button button-positive button-main left">{{ "Wyślij link"|trans }}</button>
+      </fieldset>
+    {% form.close {} %}
+  </section>
+{% endblock %}

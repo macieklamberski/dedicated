@@ -39,7 +39,7 @@ VALUES
   ('cms_default_lang',   'pl',           1);
 
 
-# Dump of table translations
+# Dump of table i18n
 # ------------------------------------------------------------
 
 DROP TABLE IF EXISTS `i18n`;
@@ -50,4 +50,16 @@ CREATE TABLE `i18n` (
   `value`     varchar(1000),
   `editable`  tinyint(1),
   PRIMARY KEY (`lang_id`, `key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+# Dump of table forgots
+# ------------------------------------------------------------
+
+CREATE TABLE `forgots` (
+  `id`         int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id`    int(11) DEFAULT NULL,
+  `hash`       varchar(255) DEFAULT NULL,
+  `expired_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
