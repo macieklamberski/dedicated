@@ -47,6 +47,8 @@ DROP TABLE IF EXISTS `i18n`;
 CREATE TABLE `i18n` (
   `lang_code` varchar(255) NOT NULL,
   `key`       varchar(255) NOT NULL,
+  `label`     varchar(255),
+  `category`  varchar(255),
   `value`     varchar(1000),
   `editable`  tinyint(1),
   PRIMARY KEY (`lang_id`, `key`)

@@ -7,7 +7,7 @@ class Controller_Dedicated_CMS_Translations extends Controller_CMS {
 		$this->template
 			->bind('translations', $translations);
 
-		$records = Jelly::query('translation')->by_editable(TRUE)->select();
+		$records = Jelly::query('translation')->by_editable(TRUE)->order_by('category', 'DESC')->select();
 
 		$translations = array();
 
@@ -18,10 +18,10 @@ class Controller_Dedicated_CMS_Translations extends Controller_CMS {
 
 		if ($this->request->method() == Request::POST)
 		{
-			unset($_POST['lang']);
-
 			foreach ($_POST as $key => $translations)
 			{
+        if (preg_match('/^lang/', $key)) continue;
+
 				$key = base64_decode($key);
 
 				foreach ($translations as $lang => $translation)

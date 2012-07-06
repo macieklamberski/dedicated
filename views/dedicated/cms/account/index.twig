@@ -1,0 +1,37 @@
+{% extends "layouts/cms.twig" %}
+
+{% block subtitle "Konto" %}
+
+{% block main %}
+  <header class="header header-page cf">
+    <h1 class="heading heading-page">{{ block("subtitle") }}</h1>
+  </header>
+
+  {% form.open current_uri, {"class":"form"} %}
+    <fieldset class="fields">
+      <legend><span>Dane użytkownika</span></legend>
+
+      <div class="field">
+        {% form.label "form-username", "Login", {"class":"label"} %}
+        {% form.input "username", user.username, {"class":"medium", "id":"form-username", "readonly":"readonly"} %}
+      </div>
+    </fieldset>
+
+    <fieldset class="fields">
+      <legend><span>Hasło</span></legend>
+
+      <div class="field">
+        {% form.label "form-password", "Nowe hasło", {"class":"label"} %}
+        {% form.password "password", "", {"id":"form-password", "class":"medium"} %}
+      </div>
+      <div class="field">
+        {% form.label "form-password-confirm", "Powtórz", {"class":"label"} %}
+        {% form.password "password_confirm", "", {"id":"form-password-confirm", "class":"medium"} %}
+      </div>
+    </fieldset>
+
+    <fieldset class="buttons">
+      <button class="button button-positive button-main left">Zapisz zmiany</button>
+    </fieldset>
+  {% form.close 0 %}
+{% endblock %}

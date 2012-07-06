@@ -1,6 +1,6 @@
 {% extends "layouts/cms.twig" %}
 
-{% block subtitle "Tłumaczenia" %}
+{% block subtitle "Teksty statyczne" %}
 
 {% block main %}
   <header class="header header-page cf">
@@ -9,19 +9,38 @@
 
   {% if translations|length > 0 %}
     {% form.open current_uri, {"class":"form"} %}
-      <fieldset class="fields fields-plain">
-        {{ h.lang_tabs(langs) }}
+      {% set i18n_langs = langs %}
 
-        {% for key, langs in translations %}
-          <div class="field">
-            {% for translation in langs %}
-              {% if loop.first %}
-                {% form.label "form-"~key|urltitle, translation.key|replace(" ", "&nbsp;"), {"class":"label", "title":translation.key} %}
+      {% for key, langs in translations %}
+        {% if langs[lang.code].category != category %}
+
+          {% set category = langs[lang.code].category %}
+
+          {% if not loop.first %}</fieldset>{% endif %}
+
+          <fieldset class="fields {{ category|length ? "" : "fields-plain" }}">
+            {{ h.lang_tabs(i18n_langs, loop.index) }}
+            {% if category|length %}
+              <legend><span>{{ category }}</span></legend>
+            {% else %}
+              <legend><span>Inne</span></legend>
+            {% endif %}
+        {% endif %}
+
+        <div class="field">
+          {% for translation in langs %}
+            <div data-lang="{{ translation.lang.code }}">
+              {% form.label "form-"~key|urltitle, translation.label|default(translation.key)|replace(" ", "&nbsp;"), {"class":"label", "title":translation.label|default(translation.key)} %}
+              {% if translation.textarea %}
+                {% form.textarea key~"["~translation.lang.code~"]", translation.value, {"class":"big", "rows":3, "id":"form-"~key|urltitle} %}
+              {% else %}
+                {% form.input key~"["~translation.lang.code~"]", translation.value, {"class":"big", "id":"form-"~key|urltitle} %}
               {% endif %}
-              {% form.input key~"["~translation.lang.code~"]", translation.value, {"class":"big", "id":"form-"~key|urltitle} %}
-            {% endfor %}
-          </div>
-        {% endfor %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+
       </fieldset>
 
       <fieldset class="buttons">

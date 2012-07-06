@@ -8,6 +8,7 @@ class Twig_Extension_Dedicated_Application extends Twig_Extension {
 			'fversion'   => new Twig_Filter_Function('twig_fversion'),
 			'replace'    => new Twig_Filter_Function('twig_replace'),
 			'route_name' => new Twig_Filter_Function('twig_route_name'),
+			'has_string' => new Twig_Filter_Function('twig_has_string'),
 		);
 	}
 
@@ -36,4 +37,9 @@ function twig_replace($string, $from = '', $to = '')
 function twig_route_name($route)
 {
 	return Route::name($route);
+}
+
+function twig_has_string($string, $searched)
+{
+	return (strpos($string, $searched) !== FALSE);
 }

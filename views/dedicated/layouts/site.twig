@@ -4,18 +4,24 @@
 <!--[if gt IE 8]><!--> <html lang="{{ lang.code|default("en") }}" class="no-js"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
-    <title>{% block title %}{% endblock %}</title>
+    <title>
+      {% block title %}
+        {% if request.controller != "index" %}
+          {% block subtitle %}{% endblock %} | 
+        {% endif %}
+        {{ settings.site_title }}
+      {% endblock %}
+    </title>
+    {% if settings.site_keywords|length %}
+      <meta name="keywords" content="{{ settings.site_keywords }}">
+    {% endif %}
+    {% if settings.site_description|length %}
+      <meta name="description" content="{{ settings.site_description }}">
+    {% endif %}
     <!--[if lt IE 9]>
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    {% block head %}
-      {% if settings.site_keywords|length %}
-        <meta name="keywords" content="{{ settings.site_keywords }}">
-      {% endif %}
-      {% if settings.site_description|length %}
-        <meta name="description" content="{{ settings.site_description }}">
-      {% endif %}
-    {% endblock %}
+    {% block head %}{% endblock %}
   </head>
   {% block body %}{% endblock %}
 </html>

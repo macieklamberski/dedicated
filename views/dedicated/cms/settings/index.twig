@@ -1,6 +1,5 @@
 {% extends "layouts/cms.twig" %}
 
-
 {% block subtitle "Ustawienia" %}
 
 {% block main %}
@@ -42,15 +41,6 @@
     </fieldset>
 
     {% block custom %}{% endblock %}
-
-    <fieldset class="fields">
-      <legend><span>Panel administracyjny</span></legend>
-      <div class="field">
-        {% form.label "form-cms-password", "Hasło", {"class":"label"} %}
-        {% form.input "admin_password", null, {"class":"medium", "id":"form-cms-password"} %}
-        <p class="hint block">Jeśli chcesz zmienić hasło do panelu administracyjnego, wprowadź je do pola powyżej. W innym wypadku pozostaw je puste. <strong>Uwaga! Tekst wprowadzany do tego pola nie jest maskowany!</strong></p>
-      </div>
-    </fieldset>
 
     <fieldset class="buttons">
       <button class="button button-positive button-main left">Zapisz zmiany</button>

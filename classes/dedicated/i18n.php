@@ -36,7 +36,7 @@ class Dedicated_I18n extends Kohana_I18n {
 
 			$translations = DB::select()
 				->from('i18n')
-				->where('langs.code', '=', $lang)
+				->where('i18n.lang_code', '=', $lang)
 				->as_object()
 				->execute();
 

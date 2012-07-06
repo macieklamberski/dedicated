@@ -10,9 +10,9 @@ class Controller_Dedicated_Application extends Controller_Template_Twig {
 
 		$this->template
 			->set('current_uri',  $current_uri)
-			->set('current_url',  preg_replace('#'.$current_uri.'$#', '', URL::base('http')))
+			->set('current_url',  str_replace(Kohana::$base_url.'/', Kohana::$base_url, URL::base('http').$current_uri))
 			->set('base_uri',     Kohana::$base_url)
-			->set('base_url',     preg_replace('#'.Kohana::$base_url.'$#', '', URL::base('http')))
+			->set('base_url',     rtrim(URL::base('http'), '/'))
 			->bind('request',     $this->request)
 			->bind('environment', $environment)
 			->bind('lang',        $lang)

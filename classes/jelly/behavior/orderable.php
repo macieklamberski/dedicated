@@ -42,7 +42,7 @@ class Jelly_Behavior_Orderable extends Jelly_Behavior {
 					->execute()
 					->get('MAX('.$field.') + 1');
 
-				$model->{$field} = max($this->_min_position, $position);
+				$model->{$field} = max($model->meta()->field($field)->orderable['min_value'], $position);
 			}
 		}
 	}

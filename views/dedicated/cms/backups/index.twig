@@ -7,7 +7,7 @@
     <h1 class="heading heading-page">{{ block("subtitle") }}</h1>
   </header>
 
-  {% if environment in ["development", "testing"] %}
+  {% if environment in ["testing"] %}
     <div class="message message-warning">
       <p>Możliwość eksportu danych jest na razie wyłączona. Będzie ona dostępna dopiero po wdrożeniu aplikacji na serwer produkcyjny.</p>
     </div>
@@ -19,7 +19,7 @@
         {% form.label null, "Baza danych", {"class":"label"} %}
 
         <div class="cf">
-          {% if environment in ["development", "testing"] %}
+          {% if environment in ["testing"] %}
             <span class="button button-disabled left">Pobierz archiwum ZIP z danymi tabel</span>
           {% else %}
             <a href="{% url "cms-backups-index", {"action":"database"} %}" class="button left">Pobierz archiwum ZIP z danymi tabel</a>
@@ -33,10 +33,10 @@
         {% form.label null, "Pliki", {"class":"label"} %}
 
         <div class="cf">
-          {% if environment in ["development", "testing"] %}
+          {% if environment in ["testing"] %}
             <span class="button button-disabled left">Pobierz archiwum ZIP z plikami witryny</span>
           {% else %}
-            <a href="{% url "cms-backups", {"action":"files"} %}" class="button left">Pobierz archiwum ZIP z plikami witryny</a>
+            <a href="{% url "cms-backups-index", {"action":"files"} %}" class="button left">Pobierz archiwum ZIP z plikami witryny</a>
           {% endif %}
         </div>
 

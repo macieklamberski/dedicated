@@ -16,7 +16,7 @@ return array(
 	'cms.settings.updated'       => 'Ustawienia zostały zapisane.',
 
 	// Translations
-	'cms.translations.updated'   => 'Tłumaczenia zostały zapisane.',
+	'cms.translations.updated'   => 'Teksty statyczne zostały zapisane.',
 
 	// Forgot Password
 	'cms.password.link_sent'     => 'Na adres skojarzony z podanym użytkownikiem został wysłany link do zmiany hasła.',

@@ -27,6 +27,13 @@ if (Kohana::$config->load('dedicated.modules.cms'))
 			'controller' => 'backups',
 		));
 
+	// Account
+	Route::set('cms-account-index', 'cms/account')
+		->defaults(array(
+			'directory'  => 'cms',
+			'controller' => 'account',
+		));
+
 	// Forgot Password
 	Route::set('cms-password-forgot', 'cms/password/forgot')
 		->defaults(array(

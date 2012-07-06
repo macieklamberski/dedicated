@@ -9,9 +9,10 @@ abstract class Controller_Dedicated_CMS_Manageable extends Controller_CMS {
 		parent::before();
 
 		$controller_name = strtolower(str_replace('Controller_CMS_', '', get_class($this)));
+    $module_name = str_replace('_', '-', $controller_name);
 
 		$default_options = array(
-			'index_route' => 'cms-'.$controller_name.'-index',
+			'index_route' => 'cms-'.$module_name.'-index',
 			'model_class' => Inflector::singular($controller_name),
 			'model_table' => $controller_name,
 			'model_name'  => ucfirst(Inflector::singular($controller_name)),
@@ -42,7 +43,7 @@ abstract class Controller_Dedicated_CMS_Manageable extends Controller_CMS {
 	{
 		if ( ! $this->record)
 		{
-			$this->record = Jelly::query(self::$_options['model_class'], $this->request->param('id'))->find();
+			$this->record = Jelly::query(self::$_options['model_class'], $this->request->param('id'))->select_one();
 		}
 
 		Session::instance()->set('affected_ids', array($this->record->id()));
@@ -67,6 +68,13 @@ abstract class Controller_Dedicated_CMS_Manageable extends Controller_CMS {
 		));
 
 		$this->records = $query->paginate($this->pagination)->select();
+		$this->records_count = Jelly::query(self::$_options['model_class'])->count();
+
+		$this->records = Jelly::query(self::$_options['model_class'])
+			->by_lang($this->request->param('records_lang'))
+			->paginate('cms', $this->pagination)
+			->select();
+
 		$this->records_count = Jelly::query(self::$_options['model_class'])->count();
 	}
 
@@ -144,7 +152,7 @@ abstract class Controller_Dedicated_CMS_Manageable extends Controller_CMS {
 
 	public function action_delete()
 	{
-	$this->perform_record_actions();
+  	$this->perform_record_actions();
 
 		$this->record->delete();
 
